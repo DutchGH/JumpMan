@@ -1,0 +1,10 @@
+quad: quadtreeMain.o quadtreeFunctions.o 
+	gcc -std=gnu99 -g -lm -o quad quadtreeMain.o quadtreeFunctions.o 
+   
+quadtreeMain.o: quadtreeMain.c quadtreeFunctions.o quadtree.h quadtreeFunctions.h
+	gcc -std=gnu99 -g -lm -c -o quadtreeMain.o quadtreeMain.c quadtreeFunctions.o
+ 
+quadtreeFunctions.o: quadtreeFunctions.c quadtree.h
+	gcc -std=gnu99  -g -lm -c quadtreeFunctions.o quadtree.c
+ 
+

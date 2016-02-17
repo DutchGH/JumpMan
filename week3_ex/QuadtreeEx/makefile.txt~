@@ -1,0 +1,11 @@
+quad: main.o quadtree.o printOut.o
+    gcc -std=gnu99 -g -lm -o quad main.o quadtree.o printOut.o
+   
+main.o: main.c quadtree.o quadtree.h
+    gcc -std=gnu99 -g  -c -o main.o main.c quadtree.o
+ 
+quadtree.o: quadtree.c quadtree.h
+    gcc -std=gnu99  -g  -c quadtree.c
+ 
+printOut.o: printOut.c quadtree.h
+    gcc -g -c -std=gnu99 printOut.c
