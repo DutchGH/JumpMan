@@ -1,0 +1,3 @@
+Scan for leaves(Node *Node);
+Enter to list(leafList **head Node *node);
+Print Leaves();
