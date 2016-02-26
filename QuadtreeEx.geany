@@ -27,7 +27,14 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=-1
+current_page=0
+FILE_NAME_0=203;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fversion2%2FquadtreeFunctions.h;0;4
+FILE_NAME_1=52;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fversion2%2Fquadtree.h;0;4
+FILE_NAME_2=2755;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fversion2%2FquadtreeFunctions.c;0;4
+FILE_NAME_3=73;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fversion2%2FquadtreeMain.c;0;4
+FILE_NAME_4=1578;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1711%2Fsc15j3h_1711_a03%2Fa03_listScan.c;0;4
+FILE_NAME_5=396;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1711%2Fsc15j3h_1711_a03%2Fa03_listEnter.c;0;4
+FILE_NAME_6=116;Make;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fversion2%2FMakefile;0;4
 
 [VTE]
 last_dir=/home/jake/Documents/COMP1921

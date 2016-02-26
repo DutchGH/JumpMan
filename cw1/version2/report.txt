@@ -1,0 +1,7 @@
+QUADTREE MODULES BREAKDOWN
+The program consists of a main file for execution, a header file for the tree structure, a file containing all the functions for the modification of the quadtree,
+as well as a corresponding header file used for importing the functions into the main.
+
+EXPLINATION OF DESTROYNODE FUNCTION
+If a node has no children, then the function will free the memory of the node, effectively destroying it. If the node has children, it will recurse through every
+child node, and free them individiually (until it reaches the head of the node).
