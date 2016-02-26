@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include "quadtree.h"
 
+//LNode *leafHead = createBlankNode();
 Node *makeNode(double x, double y, int level)
 {
 	int i; //Integer used for looping
@@ -19,6 +20,19 @@ Node *makeNode(double x, double y, int level)
 
 	return node;
 }
+
+//~ Node *makeLinkedNode(double x,double y, int level)
+//~ {
+	//~ Node *newLeaf = (Node *) malloc(sizeof(Node));
+	
+	//~ node->level = level;
+	//~ node->xy[0] = x;
+	//~ node->xy[1] = y;
+	
+	//~ newLeaf->nextLeaf = NULL;
+	
+	//~ return newLeaf;
+//~ }
 
 Node *head = NULL;
 
@@ -76,7 +90,7 @@ void writeNode(FILE *fp, Node *node)
 	}
 }
 
-LNode *leafHead = NULL;
+
 
 	
 void writeTree(Node *head)
@@ -109,12 +123,41 @@ LNode *createFilledNode(Node *leaf)
 	
 	newLeaf->node = leaf;
 	newLeaf->nextLeaf = NULL;
-	printf("Done\n");
+	//printf("Node Created\n");
+	
+	return newLeaf;
+}
+
+void addNode(LNode *listNode, Node *quadNode)
+{
+	LNode *newNode = createFilledNode(quadNode);
+	while(1)
+	{
+		if(listNode->nextLeaf == NULL)
+		{
+			listNode->nextLeaf = newNode;
+			return;
+		}
+		else
+		{
+			listNode = listNode->nextLeaf;
+		}
+	}
+}
+	
+
+LNode *createEmptyNode()
+{
+	LNode *newLeaf = (LNode *) malloc(sizeof(LNode));
+	
+	newLeaf->node = NULL;
+	newLeaf->nextLeaf = NULL;
+	printf("Blank Node Created\n");
 	
 	return newLeaf;
 }
 	
-void scanForLeaves(Node *node)
+void scanForLeaves(LNode *listNode, Node *node)
 {
 	int leaf = 1;
 	int i;
@@ -129,12 +172,13 @@ void scanForLeaves(Node *node)
 			else
 			{
 				leaf = 0;
-				scanForLeaves(node->child[i]);
+				printf("scanning for leaves\n");
+				scanForLeaves(listNode, node->child[i]);
 			}
 		}
 		if (leaf == 1)
 		{
-			createFilledNode(node);
+			addNode(listNode, node);
 		}
 		return;
 	}
@@ -142,23 +186,22 @@ void scanForLeaves(Node *node)
 }
 
 
-void writeLeaves(LNode *leafList)
+void writeLeaves(LNode *leafHead)
 {
 	FILE *fp = fopen("quad.out", "w");
-	LNode *walkNode;
-	walkNode = leafList;
-		printf("printed\n");
+	printf("File opened\n");
+	LNode *temp; //make a temporary pointer
+	printf("Temp allocated\n");  
+	temp = leafHead; //set temp pointer will head of documet, so printing process will start 
+	printf ("temp assigned\n");
+	while(temp) //while there are words in the list
+	{
+		printOut(fp, temp->node);
+		printf("added Node\n"); //print that word and its # of occurence
 		fflush(stdout);
-		
-	while(walkNode!=NULL)
-    {
-    printOut(fp, walkNode->node);
-    printf("added node\n");
-    walkNode=walkNode->nextLeaf;
-    }
-
+		temp = temp->nextLeaf;//move to next word in list.
+	}
 	fclose(fp);
-	return;
 }
 
 
