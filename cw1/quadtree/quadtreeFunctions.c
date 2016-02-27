@@ -3,8 +3,6 @@
 #include<stdlib.h>
 #include "quadtree.h"
 
-LinkedListNode *leafHead = NULL;
-//LNode *leafHead = createBlankNode();
 QuadtreeNode *makeNode(double x, double y, int level)
 {
 	int i; //Integer used for looping
@@ -99,72 +97,6 @@ void destroyNode(QuadtreeNode *node)
 	}
 }
 
-void enterForList(LinkedListNode **node, QuadtreeNode *quadnode)
-{
-	int result; //result of string comparison
-	//char *add_node(char *);
 
-	if ((*node) == NULL)//if we have readched the bottom of the tree...
-	{//if *node == NULL
-		(*node) = malloc(sizeof(quadnode));
-		if ((*node) == NULL)
-		{//if *node IS STILL EMPTY
-			printf("Memory Error!\n");
-			exit(8);
-		}// if node is still empty
-		(*node)->nextLeaf = NULL;
-		(*node)->node = quadnode;
-		//printf("New node created\n");
-		return;
-	}// if *node == NULL
-	enterForList(&(*node)->nextLeaf, quadnode); //stick it in the right tree if its a "greater value"
-};
-	
-void scanForLeaves(LinkedListNode *listNode, QuadtreeNode *node)
-{
-	int leaf = 1;
-	int i;
-	while(1)
-	{
-		for (i = 0; i < 4; ++i)
-		{
-			if (node->child[i] == NULL)
-			{
-				continue;
-			}
-			else
-			{
-				leaf = 0;
-				//printf("scanning for leaves\n");
-				scanForLeaves(listNode, node->child[i]);
-			}
-		}
-		if (leaf == 1)
-		{
-			enterForList(&leafHead, node);
-		}
-		return;
-	}
-	
-}
-
-
-void writeLeaves(/*LinkedListNode *leafHead*/)
-{
-	FILE *fp = fopen("quad.out", "w");
-	//printf("File opened\n");
-	LinkedListNode *temp; //make a temporary pointer
-	//printf("Temp allocated\n");  
-	temp = leafHead; //set temp pointer will head of documet, so printing process will start 
-	//printf ("temp assigned\n");
-	while(temp) //while there are words in the list
-	{
-		printOut(fp, temp->node);
-		//printf("added Node\n"); //print that word and its # of occurence
-		//fflush(stdout);
-		temp = temp->nextLeaf;//move to next word in list.
-	}
-	fclose(fp);
-}
 
 

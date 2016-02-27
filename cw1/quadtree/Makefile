@@ -4,7 +4,7 @@
 EXE_DIR = .
 EXE = $(EXE_DIR)/quad
 
-SRC= quadtreeMain.c quadtreeFunctions.c
+SRC= quadtreeMain.c quadtreeFunctions.c QTLinkedListFunctions.c
 
 # generic build details
 
@@ -31,7 +31,8 @@ clean:
 
 # dependencies
 
-quadtreeMain.o:	quadtreeMain.c quadtree.h quadtreeFunctions.h
-quadtreeFunctions.o: quadtreeFunctions.c quadtree.h 
+quadtreeMain.o:	quadtreeMain.c quadtree.h QTLinkedList.h
+quadtreeFunctions.o: quadtreeFunctions.c quadtree.h
+QTLinkedListFunctions.o: QTLinkedListFunctions.c quadtree.h QTLinkedList.h
 
 

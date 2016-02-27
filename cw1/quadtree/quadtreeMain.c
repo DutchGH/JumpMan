@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "quadtree.h"
-#include "quadtreeFunctions.h"
+#include "QTLinkedList.h"
 
 int main(int argc, char **argv)
 {
@@ -13,22 +13,23 @@ int main(int argc, char **argv)
 
 	//split one node to level 2
 	makeChildren(head->child[0]);
-	//makeChildren(head->child[1]);
+	//split another node to level 2
 	makeChildren(head->child[2]);
-	//makeChildren(head->child[3]);
+	
+	//Scan tree for leaves
 	scanForLeaves(leafHead,head);
 	//printf("SCANNED FOR LEAVES\n");
-	LinkedListNode *lNode;
-	lNode = leafHead;
-	while(lNode)
-	{
-		makeChildren(lNode->node);
-		lNode = lNode->nextLeaf;
-	}
-	scanForLeaves(leafHead,head);
+	
+	//split all leaves in quadtree to another level
+	makeChildrenFromLeaves(head);
+	
+	//write those leaves so they can be plotted on a grid.
 	writeLeaves(leafHead);
+	
+	/* TEST FUNCTIONS FROM EARLIER VERSIONS*/
 	//printf("SET IT TO NEXT LEAF\n");
 	//printf("WRITING LEAVES\n");
+	
 	//writeTree(head);
 	//destroyNode(head);
 	//writeTree(head);
