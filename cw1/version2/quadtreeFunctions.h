@@ -1,4 +1,4 @@
-QuadtreeNode *makenode(double x, double y, int level);
+QuadtreeNode *makeNode(double x, double y, int level);
 void makeChildren(QuadtreeNode *parent);
 void printOut( FILE *fp, QuadtreeNode *node );
 void writeNode(FILE *fp, QuadtreeNode *node);
