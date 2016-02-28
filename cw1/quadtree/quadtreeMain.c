@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	
 	//split all leaves in quadtree to another level
 	makeChildrenFromLeaves(head);
-	
+
 	//write those leaves so they can be plotted on a grid.
 	writeLeaves(leafHead);
 	
