@@ -72,17 +72,25 @@ int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 	{
 		if(indicator(walkNode->node, tolerance, choice) == false)
 		{
-			makeChildren(walkNode->node);
+			makeChildrenFromLeaves(walkNode->node);
 			++falseCounter;
 			printf("false counter at: %d\n", falseCounter);
 		}
+		else
+		{
+			break;
+			scanForLeaves(leafHead,head);
+			//splitDecision(head,tolerance,choice);
+		}
 		walkNode = walkNode->nextLeaf;
-	}
-	if(falseCounter != 0)
-	{
 		scanForLeaves(leafHead, head);
-		splitDecision(head, tolerance, choice);
+		continue;
 	}
+	//~ if(falseCounter != 0)
+	//~ {
+		//~ scanForLeaves(leafHead, head);
+		//~ splitDecision(head, tolerance, choice);
+	//~ }
 
 
 }
