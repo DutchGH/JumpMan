@@ -1,8 +1,9 @@
-
-#include "math.h"
-#include "stdbool.h"
+#include <stdio.h>
+#include <math.h>
+#include <stdbool.h>
 
 #include  "quadtree.h"
+#include  "QTLinkedList.h"
 #include  "valueTree.h"
 
 #define MAX(a,b) ( ((a)>(b)) ? (a):(b) )
@@ -41,7 +42,7 @@ double dataFunction( double x, double y, int choice ){
 // If the difference is too big request 
 // the node is split into children
 
-bool indicator( Node *node, double tolerance, int choice ) {
+bool indicator( QuadtreeNode *node, double tolerance, int choice ) {
 
   double v[4],vmin,vmax;
   double h = pow(2,-node->level);

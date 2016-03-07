@@ -30,6 +30,8 @@ long_line_column=72
 current_page=0
 FILE_NAME_0=1718;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FQTLinkedListFunctions.c;0;4
 FILE_NAME_1=502;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FquadtreeMain.c;0;4
+FILE_NAME_2=56;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FvalueTree.h;0;4
+FILE_NAME_3=0;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FvalueTree.c;0;4
 
 [VTE]
 last_dir=/home/jake
