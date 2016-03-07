@@ -61,10 +61,18 @@ bool indicator( QuadtreeNode *node, double tolerance, int choice ) {
     return false;
 }
 
-void splitDecision(LinkedListNode *node double tolerence, int choice)
+void splitDecision(LinkedListNode *node, double tolerence, int choice)
 {
 	int i;
 	int falseCounter;
 	LinkedListNode *walkNode;
+	walkNode = leafHead;
+	while(walkNode)
+	{
+		walkNode = walkNode->nextLeaf;
+		scanForLeaves(leafHead,head);
+	}
+}
+	
 	
 
