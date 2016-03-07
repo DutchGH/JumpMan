@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 #include  "quadtree.h"
 #include  "QTLinkedList.h"
@@ -61,18 +62,47 @@ bool indicator( QuadtreeNode *node, double tolerance, int choice ) {
     return false;
 }
 
-void splitDecision(LinkedListNode *node, double tolerence, int choice)
+int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 {
 	int i;
-	int falseCounter;
+	int falseCounter = 0;
 	LinkedListNode *walkNode;
 	walkNode = leafHead;
-	while(walkNode)
+	while(walkNode!=NULL)
 	{
+		if(indicator(walkNode->node, tolerance, choice) == false)
+		{
+			makeChildren(walkNode->node);
+			++falseCounter;
+			printf("false counter at: %d\n", falseCounter);
+		}
 		walkNode = walkNode->nextLeaf;
-		scanForLeaves(leafHead,head);
+	}
+	if(falseCounter != 0)
+	{
+		scanForLeaves(leafHead, head);
+		splitDecision(head, tolerance, choice);
+	}
+
+
+}
+
+void splitDecisionControl(QuadtreeNode *head, double tolerance, int choice)
+{
+	int falseCounter = 0;
+	splitDecision(head, tolerance, choice);
+	if(falseCounter != 0)
+	{
+		scanForLeaves(leafHead, head);
+		splitDecision(head, tolerance, choice);
+	}
+	else
+	{
+		return;
 	}
 }
+
+
 	
 	
 

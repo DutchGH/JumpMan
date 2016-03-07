@@ -15,14 +15,16 @@ int main(int argc, char **argv)
 	//split one node to level 2
 	makeChildren(head->child[0]);
 	//split another node to level 2
-	makeChildren(head->child[2]);
+	//makeChildren(head->child[2]);
 	
 	//Scan tree for leaves
 	scanForLeaves(leafHead,head);
 	//printf("SCANNED FOR LEAVES\n");
 	
 	//split all leaves in quadtree to another level
-	makeChildrenFromLeaves(head);
+	//makeChildrenFromLeaves(head);
+	splitDecision(head, 0.8, 0);
+	scanForLeaves(leafHead, head);
 
 	//write those leaves so they can be plotted on a grid.
 	writeLeaves(leafHead);

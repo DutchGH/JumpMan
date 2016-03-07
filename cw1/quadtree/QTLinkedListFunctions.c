@@ -31,20 +31,20 @@ void scanForLeaves(LinkedListNode *listNode, QuadtreeNode *node)
 	{
 		for (i = 0; i < 4; ++i)
 		{
-			if (node->child[i] == NULL)
+			if (node->child[i] == NULL) //if the node is empty
 			{
 				continue;
 			}
-			else
+			else //if node is not empty
 			{
 				leaf = 0;
 				//printf("scanning for leaves\n");
-				scanForLeaves(listNode, node->child[i]);
+				scanForLeaves(listNode, node->child[i]); //search its children.
 			}
 		}
 		if (leaf == 1)
 		{
-			enterForList(&leafHead, node);
+			enterForList(&leafHead, node); //enter the leaves into the linked list 
 		}
 		return;
 	}
@@ -72,12 +72,13 @@ void writeLeaves()
 
 void makeChildrenFromLeaves(QuadtreeNode *head)
 {
-	LinkedListNode *lNode;
-	lNode = leafHead;
-	while(lNode)
+	LinkedListNode *lNode; //create a node to traverse through
+	lNode = leafHead; //start at the head
+	while(lNode) //while a node exists
 	{
-		makeChildren(lNode->node);
-		lNode = lNode->nextLeaf;
+		makeChildren(lNode->node); //make children for that node
+		lNode = lNode->nextLeaf; //move to the next leaf
 	}
-	scanForLeaves(leafHead,head);
+	enterForList(&leafHead, head);
+	scanForLeaves(leafHead,head); //scan for leaves when this is done.
 }
