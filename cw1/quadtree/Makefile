@@ -31,7 +31,7 @@ clean:
 
 # dependencies
 
-quadtreeMain.o:	quadtreeMain.c quadtree.h QTLinkedList.h
+quadtreeMain.o:	quadtreeMain.c quadtree.h QTLinkedList.h valueTree.h
 quadtreeFunctions.o: quadtreeFunctions.c quadtree.h
 QTLinkedListFunctions.o: QTLinkedListFunctions.c quadtree.h QTLinkedList.h
 valueTree.o: valueTree.c quadtree.h QTLinkedList.h valueTree.h
