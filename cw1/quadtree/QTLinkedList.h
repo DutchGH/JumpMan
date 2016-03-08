@@ -5,9 +5,9 @@ typedef struct lnode
 }LinkedListNode;
 extern LinkedListNode *leafHead;
 
-void enterForList(LinkedListNode **node, QuadtreeNode *quadnode);
-void scanForLeaves(LinkedListNode *listNode, QuadtreeNode *node);
+void enterForList(LinkedListNode **node, Node *quadnode);
+void scanForLeaves(LinkedListNode *listNode, Node *node);
 void writeLeaves();
-void makeChildrenFromLeaves(QuadtreeNode *head);
+void makeChildrenFromLeaves(Node *head);
 void deleteNode(LinkedListNode *linkedNode);
 

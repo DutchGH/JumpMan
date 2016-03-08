@@ -1,3 +1,51 @@
-Scan for leaves(Node *Node);
-Enter to list(leafList **head Node *node);
-Print Leaves();
+
+Task 1: The leaf node list (10 marks)
+
+Create a linked list of leaf-nodes in your Quadtree.
+
+You should assign a pointer to the first leaf-node, eg. Node *leafHead, and an additional field in your Node data structure, eg. Node *nextLeaf, such that you can visit every leaf node in the tree without visiting the parents.
+
+Test this by creating a new version of the writeTree() function that uses the leaf-nodes directly rather than visiting the whole tree.
+
+Hint: 
+
+I think it is easier to build the initial tree first, as before, then create the leaf list separately, rather than try and create tree and leaf-list together.
+
+This also means that changes to your existing, working, code are minimised. In general try and create new functions for the new functionality.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Implementation
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Task 2: Growing the Quadtree (5 marks)
+
+Using the leaf-node list add one level to every leaf node in the tree, growing it uniformly overall by one level.
+
+You can visualise the tree produced using writeTree() and Gnuplot. 
+
+Note:
+
+If you can't get the leaf list working you can still complete this task using the whole tree. You already know how to visit the leaf nodes (see the writeNode() function).
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Task 3: Generating a data-dependent Quadtree
+double treeData( double x, double y, int choice ): this function returns a value at a physical location in the quadtree. The choice value is 0,1 or 2 and selects different underlying data models.You should choose one value for testing your code. Once you have validated your code try the other values.
+
+bool indicator( Node *node, double tolerance, int choice ): if this function returns false we should add children to the current node. If it returns true we do not add children.
+
+We should pass through the current set of leaf nodes in the tree and use the indicator() function above to decide whether to add children to that node.
+
+For every complete pass through the leaf nodes we should record the number of false results.
+
+We should pass through the list of leaf nodes again unless that number is zero.
+
+Note:
+
+The indicator() function computes a true/false value for a given node using 2 parameters:
+
+- tolerance this sets how large a variation in the data is allowed on that node. A typical value is 0.8
+
+- choice this selects from 3 predefined functions that describe the data model. Start with choice=0
+
+Note:
+
+If you can't get the leaf list working you can still complete this task using the whole tree. You already know how to visit the leaf nodes (see the writeNode() function).
+
+
