@@ -64,7 +64,6 @@ bool indicator( QuadtreeNode *node, double tolerance, int choice ) {
 
 int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 {
-	int i;
 	int falseCounter = 0;
 	LinkedListNode *walkNode;
 	walkNode = leafHead;
@@ -89,17 +88,32 @@ int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 
 void splitDecisionControl(QuadtreeNode *head, double tolerance, int choice)
 {
-	int falseCounter = 0;
-	splitDecision(head, tolerance, choice);
-	if(falseCounter != 0)
+	int falseNotifier = 0;
+	LinkedListNode *walkNode;
+	QuadtreeNode *temp;
+	walkNode = leafHead;
+	while(falseNotifier == 0)
 	{
-		scanForLeaves(leafHead, head);
-		splitDecision(head, tolerance, choice);
+		int falseCounter = 0;
+		for(walkNode->node; walkNode!=NULL; walkNode = walkNode->nextLeaf)
+		{
+			if (indicator(walkNode->node, tolerance, choice) == false)
+			{
+				makeChildren(walkNode->node);
+				falseCounter++;
+				printf ("%d\n", falseCounter);
+			}
+		}
+		if (falseCounter == 0)
+		{
+			falseNotifier = 1;
+		}
+		deleteNode(walkNode);
+		scanForLeaves(leafHead,head);
+		splitDecisionControl(head, tolerance, choice);
 	}
-	else
-	{
-		return;
-	}
+		
+
 }
 
 

@@ -9,3 +9,5 @@ void enterForList(LinkedListNode **node, QuadtreeNode *quadnode);
 void scanForLeaves(LinkedListNode *listNode, QuadtreeNode *node);
 void writeLeaves();
 void makeChildrenFromLeaves(QuadtreeNode *head);
+void deleteNode(LinkedListNode *linkedNode);
+

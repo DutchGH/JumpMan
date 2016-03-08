@@ -82,3 +82,9 @@ void makeChildrenFromLeaves(QuadtreeNode *head)
 	enterForList(&leafHead, head);
 	scanForLeaves(leafHead,head); //scan for leaves when this is done.
 }
+
+void deleteNode(LinkedListNode *linkedNode)
+{
+	free(linkedNode->node);
+	free(linkedNode);
+}
