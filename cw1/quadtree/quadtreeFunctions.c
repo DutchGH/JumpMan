@@ -13,10 +13,12 @@ Node *makeNode(double x, double y, int level)
 	qnode->level = level;
 	qnode->xy[0] = x;
 	qnode->xy[1] = y;
+	qnode->nextLeaf = NULL;
 
 	for (i = 0; i < 4; ++i)
+	{
 		qnode->child[i] = NULL;
-
+	}
 	return qnode;
 }
 
@@ -35,6 +37,8 @@ void makeChildren(Node *parent)
 	parent->child[1] = makeNode(x + hChild, y, level + 1);
 	parent->child[2] = makeNode(x + hChild, y + hChild, level + 1);
 	parent->child[3] = makeNode(x, y + hChild, level + 1);
+	
+	//Converting 
 
 	return;
 }
