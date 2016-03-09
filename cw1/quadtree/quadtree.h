@@ -3,6 +3,7 @@ typedef struct node
 	int level;
 	double xy[2];
 	struct node *child[4];
+	struct node *currentLeaf;
 	struct node *nextLeaf;
 }Node;
 
@@ -11,10 +12,14 @@ void makeChildren(Node *parent);
 void printOut( FILE *fp, Node *qnode );
 void writeNode(FILE *fp, Node *qnode);
 void writeTree(Node *head);
-void destroyNode(Node *qnode);
+void destroyTree(Node *qnode);
 
-//~ void enterForList(Quadtree **leaf, Node *qnode);
-//~ void scanForLeaves(Quadtree *leafNode, Node *qnode);
-//~ void writeLeaves();
-//~ void makeChildrenFromLeaves(Node *head);
-//~ void deleteNode(LinkedListNode *linkedNode);
+void enterForList(Node**leafHead, Node *qnode);
+void scanForLeaves(Node *leafHead, Node *parent);
+void writeLeaves(Node *leafHead);
+void writeLeaf(FILE *fp, Node *node);
+void writeAllLeaves(Node *headLeaf);
+
+
+
+

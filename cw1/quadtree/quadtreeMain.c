@@ -7,18 +7,18 @@ int main(int argc, char **argv)
 {
 	//create the headnode at level 0
 	Node *head = makeNode(0.0, 0.0, 0);
-
+	Node *leafHead = head;
 	//split to level 1
 	makeChildren(head);
 
 	//split one node to level 2
 	makeChildren(head->child[0]);
 	//split another node to level 2
-	//makeChildren(head->child[2]);
+	makeChildren(head->child[2]);
 	
 	//Scan tree for leaves
-	//scanForLeaves(firstLeaf,head);
-	//printf("SCANNED FOR LEAVES\n");
+	scanForLeaves(leafHead,head);
+	printf("SCANNED FOR LEAVES\n");
 	
 	//split all leaves in quadtree to another level
 	//makeChildrenFromLeaves(head);
@@ -26,14 +26,14 @@ int main(int argc, char **argv)
 	//scanForLeaves(leafHead, head);
 
 	//write those leaves so they can be plotted on a grid.
-	//writeLeaves(leafHead);
+	writeLeaves(leafHead);
 	
 	/* TEST FUNCTIONS FROM EARLIER VERSIONS*/
 	//printf("SET IT TO NEXT LEAF\n");
 	//printf("WRITING LEAVES\n");
 	
-	writeTree(head);
-	//destroyNode(head);
+	//writeTree(head);
+	destroyTree(head);
 	//writeTree(head);
 	
 	printf("Process Completed\n");
