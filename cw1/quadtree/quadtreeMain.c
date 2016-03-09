@@ -22,9 +22,11 @@ int main(int argc, char **argv)
 	//printf("SCANNED FOR LEAVES\n");
 	
 	//split all leaves in quadtree to another level
-	//makeChildrenFromLeaves(head);
-	splitDecision(head, 0.8, 0);
+	makeChildrenFromLeaves(head);
+	splitDecision(head, 0.3, 1);
 	scanForLeaves(leafHead, head);
+	//scanForLeaves(leafHead,head);
+
 
 	//write those leaves so they can be plotted on a grid.
 	writeLeaves(leafHead);
@@ -34,7 +36,7 @@ int main(int argc, char **argv)
 	//printf("WRITING LEAVES\n");
 	
 	//writeTree(head);
-	//destroyNode(head);
+	destroyNode(head); //remove the tree
 	//writeTree(head);
 	
 	printf("Process Completed\n");

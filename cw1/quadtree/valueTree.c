@@ -68,7 +68,12 @@ int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 	int falseCounter = 0;
 	LinkedListNode *walkNode;
 	walkNode = leafHead;
-	while(walkNode!=NULL)
+	bool loop = true;
+	while(loop == true)
+	{
+	scanForLeaves(leafHead, head);
+	falseCounter = 0;
+	while(walkNode->nextLeaf!=NULL)
 	{
 		if(indicator(walkNode->node, tolerance, choice) == false)
 		{
@@ -78,12 +83,26 @@ int splitDecision(QuadtreeNode *head, double tolerance, int choice)
 		}
 		walkNode = walkNode->nextLeaf;
 	}
+	if(falseCounter == 0)
+	{
+			loop = false;
+	}
+}
+	/*
 	if(falseCounter != 0)
 	{
 		scanForLeaves(leafHead, head);
-		splitDecision(head, tolerance, choice);
+		falseCounter = splitDecision(head, tolerance, choice);
+		if (falseCounter == 0)
+		{
+			printf("Here we ago again!!\n");
+		}
 	}
-
+	else
+	{
+		return falseCounter;
+	}
+ */
 
 }
 

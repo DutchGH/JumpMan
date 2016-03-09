@@ -27,15 +27,7 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
-FILE_NAME_0=17;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FQTLinkedList.h;0;4
-FILE_NAME_1=700;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FQTLinkedListFunctions.c;0;4
-FILE_NAME_2=233;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2Fquadtree.h;0;4
-FILE_NAME_3=362;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FquadtreeFunctions.c;0;4
-FILE_NAME_4=154;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FquadtreeMain.c;0;4
-FILE_NAME_5=1703;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FvalueTree.c;0;4
-FILE_NAME_6=85;C;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FvalueTree.h;0;4
-FILE_NAME_7=682;Make;0;EUTF-8;1;1;0;%2Fhome%2Fjake%2FDocuments%2FCOMP1921%2Fcw1%2Fquadtree%2FMakefile;0;4
+current_page=-1
 
 [VTE]
-last_dir=/home/jake
+last_dir=/home/jake/Documents/COMP1921/cw1/quadtree
