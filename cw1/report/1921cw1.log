@@ -1,4 +1,4 @@
-This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2016.2.22)  9 MAR 2016 14:55
+This is LuaTeX, Version beta-0.80.0 (TeX Live 2015/Debian) (rev 5238)  (format=lualatex 2016.2.22)  9 MAR 2016 22:11
  restricted \write18 enabled.
 **1921cw1.tex
 (./1921cw1.tex
@@ -181,7 +181,7 @@ Here is how much of LuaTeX's memory you used:
  100000,106986 words of node,token memory allocated
  267 words of node memory still in use:
    2 hlist, 1 vlist, 1 rule, 2 glue, 41 glue_spec, 1 write nodes
-   avail lists: 2:14,3:50,4:259,5:17,6:257,7:8,9:49,10:13
+   avail lists: 2:14,3:58,4:299,5:22,6:296,7:8,9:63,10:14
  6563 multiletter control sequences out of 65536+600000
  42 fonts using 1661595 bytes
  37i,6n,32p,215b,219s stack positions out of 5000i,500n,10000p,200000b,100000s
@@ -190,7 +190,7 @@ Here is how much of LuaTeX's memory you used:
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><</usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
-Output written on 1921cw1.pdf (1 page, 56901 bytes).
+Output written on 1921cw1.pdf (1 page, 60236 bytes).
 
 PDF statistics: 28 PDF objects out of 1000 (max. 8388607)
  19 compressed objects within 1 object stream

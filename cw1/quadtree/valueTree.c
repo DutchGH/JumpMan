@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 #include  "quadtree.h"
-#include  "QTLinkedList.h"
+#include  "qtLinkedList.h"
 #include  "valueTree.h"
 
 #define MAX(a,b) ( ((a)>(b)) ? (a):(b) )

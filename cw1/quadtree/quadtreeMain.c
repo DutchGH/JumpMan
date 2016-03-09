@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "quadtree.h"
-#include "QTLinkedList.h"
+#include "qtLinkedList.h"
 #include "valueTree.h"
 
 int main(int argc, char **argv)
