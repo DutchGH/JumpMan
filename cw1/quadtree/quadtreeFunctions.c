@@ -60,15 +60,16 @@ void printOut( FILE *fp, QuadtreeNode *node ) {
 void writeNode(FILE *fp, QuadtreeNode *node)
 {
 	int i;
-	if (node->child[0] == NULL)
+	if (node->child[0] == NULL)//if the child of the node is empty
 	{
-		printOut(fp, node);
+		printOut(fp, node); //print out the parent
 	}
 	else
 	{
 		for (i = 0; i < 4; ++i)
 		{
-			writeNode(fp, node->child[i]);
+			//recurse through its children and find the leaves
+			writeNode(fp, node->child[i]); 
 		}
 	}
 }
