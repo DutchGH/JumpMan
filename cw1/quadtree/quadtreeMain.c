@@ -24,13 +24,12 @@ int main(int argc, char **argv)
 	
 	//split all leaves in quadtree to another level
 	makeChildrenFromLeaves(head);
+	//scanForLeaves(leafHead,head);
+	//makeChildrenFromLeaves(head);
+	//scanForLeaves(leafHead,head);
 	
 	//Go through the leaf nodes and decide whether they should be split
-	splitDecision(head, 0.3, 2);
-	
-	//rescan for leaves so the pattern is finalised
-	scanForLeaves(leafHead, head);
-
+	splitDecision(head, 0.4, 0);
 
 	//write those leaves so they can be plotted on a grid.
 	writeLeaves(leafHead);
@@ -41,7 +40,7 @@ int main(int argc, char **argv)
 	
 	//writeTree(head);
 	
-	//clear the tree from memory now that the leaves have been wiped
+	//clear the tree from memory now that the leaves have been written
 	destroyNode(head);
 	//writeTree(head);
 	

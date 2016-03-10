@@ -36,6 +36,8 @@ void makeChildren(QuadtreeNode *parent)
 	parent->child[2] = makeNode(x + hChild, y + hChild, level + 1);
 	parent->child[3] = makeNode(x, y + hChild, level + 1);
 
+	/*--------ENABLE THIS TO SEE WHAT LEVEL THE CHILD HAS BEEN CREATED ON---------*/
+	//printf("Child node on level %d\n",parent->level+1);
 	return;
 }
 
@@ -64,7 +66,7 @@ void writeNode(FILE *fp, QuadtreeNode *node)
 	{
 		printOut(fp, node); //print out the parent
 	}
-	else
+	else 
 	{
 		for (i = 0; i < 4; ++i)
 		{

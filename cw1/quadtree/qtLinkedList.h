@@ -5,6 +5,7 @@ typedef struct lnode
 }LinkedListNode;
 extern LinkedListNode *leafHead;
 
+void splitDecision(QuadtreeNode *head, double tolerance, int choice);
 void enterForList(LinkedListNode **node, QuadtreeNode *quadnode);
 void scanForLeaves(LinkedListNode *listNode, QuadtreeNode *node);
 void writeLeaves();

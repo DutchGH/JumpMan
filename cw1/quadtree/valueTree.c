@@ -62,32 +62,6 @@ bool indicator( QuadtreeNode *node, double tolerance, int choice ) {
     return false;
 }
 
-void splitDecision(QuadtreeNode *head, double tolerance, int choice)
-{//splitDecision
-	int falseCounter;
-	LinkedListNode *walkNode; //set a walknode for the linked list
-	walkNode = leafHead; //set it to the leaf of the list so it can bein walking
-	bool loop = true; //set a boolean to stop the loop when required
-	while(loop == true)
-	{//while loop = true
-		scanForLeaves(leafHead, head); //scan for the leaves at the start of the loop
-		falseCounter = 0; //start the false counter at 0
-		while(walkNode->nextLeaf!=NULL)
-		{//while nextleaf != NULL
-			if(indicator(walkNode->node, tolerance, choice) == false)
-			{
-				makeChildren(walkNode->node); //make children 
-				++falseCounter; //increment the false counter 
-				//printf("false counter at: %d\n", falseCounter);
-			}
-			walkNode = walkNode->nextLeaf; //move to the next leaf
-		}//while nextleaf !=NULL
-		if(falseCounter == 0) //if it goes back to 0
-		{
-			loop = false; //end the loop when the falsecounter returns to 0
-		}
-	}//while loop = true
-}//splitDecision
 
 
 
