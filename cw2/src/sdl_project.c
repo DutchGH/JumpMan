@@ -9,9 +9,36 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
+#include "SDL/SDL.h"
+#include "init.h"
+#include "input.h"
 
-int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
-	return EXIT_SUCCESS;
+int main(int argc, char* argv[])
+{
+	int go;
+
+	//Start SDL
+
+	init("Promethian Knights - Development Copy");
+
+	//cleanup when application exits
+
+	atexit(cleanup);
+
+	go = 1;
+
+
+	while (go == 1)
+	{
+		getInput();
+
+		/* Sleep briefly to stop sucking up all the CPU time */
+
+		SDL_Delay(16);
+	}
+
+
+	exit(0);
 }
