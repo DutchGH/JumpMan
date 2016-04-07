@@ -17,7 +17,7 @@
 
 int main(int argc, char* argv[])
 {
-	int go;
+	int go = 1;
 
 	//Start SDL
 
@@ -26,9 +26,6 @@ int main(int argc, char* argv[])
 	//cleanup when application exits
 
 	atexit(cleanup);
-
-	go = 1;
-
 
 	while (go == 1)
 	{
