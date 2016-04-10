@@ -12,8 +12,12 @@
 #include <string.h>
 #include <stdlib.h>
 #include "SDL/SDL.h"
+#include "SDL/SDL_image.h"
 #include "init.h"
 #include "input.h"
+#include "graphics.h"
+
+extern SDL_Surface *requiem;
 
 int main(int argc, char* argv[])
 {
@@ -26,10 +30,12 @@ int main(int argc, char* argv[])
 	//cleanup when application exits
 
 	atexit(cleanup);
+	requiem = loadImage("gfx/requiem.jpg");
 
 	while (go == 1)
 	{
 		getInput();
+		updateScreen();
 
 		/* Sleep briefly to stop sucking up all the CPU time */
 
