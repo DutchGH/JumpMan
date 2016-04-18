@@ -14,6 +14,8 @@
 #include <stdbool.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include "keyPressSurfaces.h"
+#include "loadMedia.h"
 
 
 const int SCREEN_WIDTH = 800;
@@ -55,20 +57,6 @@ bool init()
 	return success;
 }
 
-bool loadMedia()
-{
-	//success flag
-	bool success = true;
-
-	//load splash image
-	gRequiem = IMG_Load("gfx/requiem.jpg");
-	if(gRequiem == NULL)
-	{
-		printf("unable to load image %s - SDL Error: %s\n", "gfx/requiem.jpg",SDL_GetError());
-		success = false;
-	}
-	return success;
-}
 
 void quit()
 {
