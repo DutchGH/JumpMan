@@ -24,8 +24,10 @@ const int SCREEN_HEIGHT = 600;
 SDL_Window* gWindow = NULL;
 //surface contained by the window
 SDL_Surface* gScreenSurface = NULL;
+
+SDL_Surface* gKeyPressSurfaces[KEY_PRESS_SURFACE_TOTAL];
 //image to load on the screen
-SDL_Surface* gRequiem = NULL;
+SDL_Surface* gCurrentSurface = NULL;
 
 //Starts SDL & creates a window
 bool init()
@@ -60,12 +62,15 @@ bool init()
 
 void quit()
 {
-	//Deallocate surface
-	SDL_FreeSurface(gRequiem);
-	gRequiem = NULL;
+	//Deallocate surfaces
+	for( int i = 0; i < KEY_PRESS_SURFACE_TOTAL; ++i )
+	{
+		SDL_FreeSurface( gKeyPressSurfaces[ i ] );
+		gKeyPressSurfaces[ i ] = NULL;
+	}
 
 	//Destroy window
-	SDL_DestroyWindow(gWindow);
+	SDL_DestroyWindow( gWindow );
 	gWindow = NULL;
 
 	//Quit SDL subsystems
@@ -90,6 +95,8 @@ int main(int argc, char* argv[])
 		{
 			bool go = true;
 			SDL_Event e;
+			gCurrentSurface = gKeyPressSurfaces[ KEY_PRESS_SURFACE_DEFAULT ];
+
 			while(go)
 			{
 				while(SDL_PollEvent(&e))
@@ -98,8 +105,33 @@ int main(int argc, char* argv[])
 					{
 						go = false;
 					}
+					else if(e.type == SDL_KEYDOWN)
+					{
+						switch(e.key.keysym.sym)
+						{
+						case SDLK_UP:
+							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_UP];
+							break;
+
+						case SDLK_DOWN:
+							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DOWN];
+							break;
+
+						case SDLK_LEFT:
+							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_LEFT];
+							break;
+
+						case SDLK_RIGHT:
+							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_RIGHT];
+							break;
+
+						default:
+							gCurrentSurface = gKeyPressSurfaces[KEY_PRESS_SURFACE_DEFAULT];
+							break;
+						}
+					}
 				}
-				SDL_BlitSurface(gRequiem, NULL, gScreenSurface, NULL);
+				SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
 				SDL_UpdateWindowSurface(gWindow);
 			}
 
