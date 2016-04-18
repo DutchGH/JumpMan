@@ -11,36 +11,38 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
-#include "init.h"
-#include "input.h"
-#include "graphics.h"
+#include "SDL2/SDL.h"
 
-extern SDL_Surface *requiem;
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 600;
 
 int main(int argc, char* argv[])
 {
-	int go = 1;
+	SDL_Window* window = NULL;
+	SDL_Surface* screenSurface = NULL;
 
-	//Start SDL
-
-	init("Promethian Knights - Development Copy");
-
-	//cleanup when application exits
-
-	atexit(cleanup);
-	requiem = loadImage("gfx/requiem.jpg");
-
-	while (go == 1)
+	if(SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
-		getInput();
-		updateScreen();
-
-		/* Sleep briefly to stop sucking up all the CPU time */
-
-		SDL_Delay(16);
+		printf("SDL could not initialise. SDL Error: %s\n", SDL_GetError());
 	}
+	else
+	{
+		window = SDL_CreateWindow("Promethian Knights", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+		if(window == NULL)
+		{
+			printf("window could not be created - SDL Error: %s\n", SDL_GetError());
+		}
+		else
+		{
+			screenSurface = SDL_GetWindowSurface(window);
+			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+			SDL_UpdateWindowSurface(window);
+			SDL_Delay(2000);
+		}
+	}
+
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 
 
 	exit(0);
