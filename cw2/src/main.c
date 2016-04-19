@@ -11,11 +11,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "SDL/SDL.h"
-#include "SDL/SDL_image.h"
+#include <SDL/SDL.h>
+#include <SDL/SDL_image.h>
+#include <SDL/SDL_mixer.h>
 #include "init.h"
 #include "input.h"
 #include "graphics.h"
+#include "audio.h"
 
 extern SDL_Surface *requiem;
 
@@ -25,7 +27,7 @@ int main(int argc, char* argv[])
 
 	//Start SDL
 
-	init("Promethian Knights - Development Copy");
+	init("Promethian Knights");
 
 	//cleanup when application exits
 

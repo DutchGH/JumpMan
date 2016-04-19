@@ -9,6 +9,7 @@
 #include <stdlib.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
+#include "SDL/SDL_mixer.h"
 
 extern SDL_Surface *screen;
 SDL_Surface *requiem;
@@ -52,6 +53,6 @@ void drawImage(SDL_Surface *image, int x, int y)
 void updateScreen()
 {
 	SDL_FillRect(screen, NULL, 0);
-	drawImage(requiem, 160,120);
+	drawImage(requiem, 0,0);
 	SDL_Flip(screen);
 }
