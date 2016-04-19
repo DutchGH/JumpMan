@@ -28,11 +28,11 @@ void init(char *title)
 	}
 
 	//Open a screen with a resolution of 800x600
-	screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,0,SDL_HWPALETTE);
+	screen = SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,0,SDL_HWPALETTE|SDL_DOUBLEBUF);
 
 	if(screen == NULL)
 	{
-		printf("Couldn't set screen mode to 640 x 480: %s\n",SDL_GetError());
+		printf("Couldn't set screen mode to 800 x 600: %s\n",SDL_GetError());
 		exit(1);
 	}
 

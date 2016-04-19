@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
+#include <SDL/SDL_mixer.h>
+
+extern Mix_Chunk *blurp;
 
 
 void getInput()
@@ -32,9 +35,13 @@ void getInput()
 			case SDL_KEYDOWN:
 				switch (event.key.keysym.sym)
 				{
+					case SDLK_SPACE:
+						playSound(blurp);
+						break;
+
 					case SDLK_ESCAPE:
 						exit(0);
-					break;
+						break;
 
 					default:
 					break;

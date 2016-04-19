@@ -20,6 +20,7 @@
 #include "audio.h"
 
 extern SDL_Surface *requiem;
+Mix_Chunk *blurp;
 
 int main(int argc, char* argv[])
 {
@@ -33,6 +34,17 @@ int main(int argc, char* argv[])
 
 	atexit(cleanup);
 	requiem = loadImage("gfx/requiem.jpg");
+	if(requiem == NULL)
+	{
+		exit(0);
+	}
+
+	blurp = loadSound("audio/blurp.wav");
+
+	if(blurp == NULL)
+	{
+		exit(0);
+	}
 
 	while (go == 1)
 	{
