@@ -13,6 +13,7 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include "graphics.h"
 
 SDL_Surface *screen;
 const int SCREEN_WIDTH = 800;
@@ -49,6 +50,7 @@ void init(char *title)
 void cleanup()
 {
 	Mix_CloseAudio();
+	freeSprites();
 	SDL_Quit(); //exit SDL
 }
 

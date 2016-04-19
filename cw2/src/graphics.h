@@ -11,6 +11,10 @@
 SDL_Surface *loadImage(char *name);
 void drawImage(SDL_Surface *image, int x, int y);
 void updateScreen();
+void loadSprite(int index, char *name);
+void *getSprites(int index);
+void freeSprites();
+void loadAllSprites();
 
 
 

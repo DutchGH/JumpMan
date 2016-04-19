@@ -14,6 +14,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_mixer.h>
+#include "defs.h"
+#include "structs.h"
 #include "init.h"
 #include "input.h"
 #include "graphics.h"
@@ -24,6 +26,7 @@ Mix_Chunk *blurp;
 
 int main(int argc, char* argv[])
 {
+	unsigned int frameLimit = SDL_GetTicks() + 16;
 	int go = 1;
 
 	//Start SDL
