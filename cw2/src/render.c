@@ -22,8 +22,8 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 	SDL_SetRenderDrawColor(renderer,255,255,255,255);
 
 	//create a rectangle in the centre with defined co-ordinates
-	SDL_Rect rectangle = {game->player.x,game->player.y,50,50};
-	SDL_RenderFillRect(renderer, &rectangle);
+	SDL_Rect playerRect = {game->player.x,game->player.y,50,50};
+	SDL_RenderFillRect(renderer, &playerRect);
 
 	//create sprite for enemy
 	SDL_Rect enemyRect = {50,50,106,120};

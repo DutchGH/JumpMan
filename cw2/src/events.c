@@ -10,6 +10,7 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "structs.h"
+
 int processEvents(SDL_Window *window, GameState *game)
 {
 	int done = 0;
@@ -24,7 +25,7 @@ int processEvents(SDL_Window *window, GameState *game)
 			{//if(window)
 				SDL_DestroyWindow(window);
 				window = NULL;
-			}//if(window
+			}//if(window)
 			break;
 
 		case SDL_KEYDOWN:
@@ -45,19 +46,19 @@ int processEvents(SDL_Window *window, GameState *game)
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if(state[SDL_SCANCODE_LEFT])
 	{
-		game->player.x -= 10;
+		game->player.x -= 10; //move player left
 	}
 	if(state[SDL_SCANCODE_RIGHT])
 	{
-		game->player.x += 10;
+		game->player.x += 10; //move player right
 	}
 	if(state[SDL_SCANCODE_UP])
 	{
-		game->player.y -=10;
+		game->player.y -=10; //move player up
 	}
 	if(state[SDL_SCANCODE_DOWN])
 	{
-		game->player.y +=10;
+		game->player.y +=10; //move player down
 	}
 
 	return done;

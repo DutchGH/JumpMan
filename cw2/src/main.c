@@ -19,19 +19,30 @@
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
 
+void initialiseSDL()
+{
+	//initialise SDL
+	SDL_Init(SDL_INIT_VIDEO);
 
+	//error handling for launching SDL
+	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
+	{
+		fprintf(stderr,"SDL_Init failed %s", SDL_GetError());
+	}
+}
 
 
 int main(int argc, char* argv[])
 {
-	GameState gameState;
-	SDL_Window *window = NULL;
-	SDL_Renderer *renderer = NULL;
-	SDL_Surface *enemySurface = NULL;
-	//initialise SDL
-	SDL_Init(SDL_INIT_VIDEO);
+	GameState gameState; //create a new gamestate (with all containing sprites and elements)
+	SDL_Window *window = NULL; //create a window to display on
+	SDL_Renderer *renderer = NULL; //renderer for SDL
+	SDL_Surface *enemySurface = NULL; //pointer to load enemy texture
 
+	//call function to launch SDL
+	initialiseSDL();
 
+	//set initial co-ordinates for player
 	gameState.player.x = 350;
 	gameState.player.y = 250;
 
@@ -46,6 +57,8 @@ int main(int argc, char* argv[])
 
 	//create renderer with vsync to prevent screen tearing
 	renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
+
+	//load sprite for enemy
 	enemySurface = IMG_Load("gfx/megaman.png");
 	if(enemySurface == NULL)
 	{
@@ -54,8 +67,12 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	//load texture for renderer
 	gameState.enemy = SDL_CreateTextureFromSurface(renderer, enemySurface);
+	//free the surface as its no longer necessary
 	SDL_FreeSurface(enemySurface);
+
+	//flag for event loop for program
 	int done = 0;
 
 	//create an event loop for the game
@@ -67,10 +84,11 @@ int main(int argc, char* argv[])
 			done = 1;
 		}
 		doRender(renderer, &gameState);
-
 	}//while(!done)
 
+	//clean up textures
 	SDL_DestroyTexture(gameState.enemy);
+
 	//destroy SDL elements to free up memory once done.
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
