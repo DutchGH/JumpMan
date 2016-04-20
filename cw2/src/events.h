@@ -7,7 +7,7 @@
 
 #ifndef EVENTS_H_
 #define EVENTS_H_
-int processEvents(SDL_Window *window, Player *player);
+int processEvents(SDL_Window *window, GameState *game);
 
 
 

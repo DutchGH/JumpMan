@@ -15,5 +15,21 @@ typedef struct player
 	char *name;
 }Player;
 
+typedef struct enemy
+{
+	int x,y;
+}Enemy;
+
+
+typedef struct gameState
+{
+	//player
+	Player player;
+
+	//enemy type one - currently a placeholder megaman sprite
+	Enemy megaman[10];
+	SDL_Texture *enemy;
+	SDL_Renderer *renderer;
+}GameState;
 
 #endif /* STRUCTS_H_ */
