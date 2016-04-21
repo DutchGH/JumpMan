@@ -11,6 +11,7 @@
 #include "SDL2/SDL_image.h"
 #include "structs.h"
 
+extern int globalTime;
 int processEvents(SDL_Window *window, GameState *game)
 {
 	int done = 0;
@@ -46,21 +47,41 @@ int processEvents(SDL_Window *window, GameState *game)
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if(state[SDL_SCANCODE_LEFT])
 	{
-
 		game->player.x -= 5; //move player left
+		game->player.walking = 1;
+		game->player.facingLeft = 1;
+
+		if (globalTime%6 == 0)
+		{
+			game->player.currentSprite++;
+			game->player.currentSprite %=4;
+		}
 	}
-	if(state[SDL_SCANCODE_RIGHT])
+	else if(state[SDL_SCANCODE_RIGHT])
 	{
-		game->player.x += 5; //move player right
+		game->player.x += 5;
+		game->player.walking = 1;
+		game->player.facingLeft = 0;
+
+		if (globalTime%6 == 0)
+		{
+			game->player.currentSprite++;
+			game->player.currentSprite %=4;
+		}
 	}
-	if(state[SDL_SCANCODE_UP])
+	else
 	{
-		game->player.y -=5; //move player up
+		game->player.walking = 0;
+		game->player.currentSprite = 4;
 	}
-	if(state[SDL_SCANCODE_DOWN])
+
+	if(state[SDL_SCANCODE_UP] && !game->player.dy)
 	{
-		game->player.y +=5; //move player down
+		game->player.dy = -15;
 	}
+
+
+
 
 	return done;
 }

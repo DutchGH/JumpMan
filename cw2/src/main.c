@@ -18,6 +18,7 @@
 #include "render.h"
 #define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 600
+int globalTime = 0;
 
 void initialiseSDL()
 {
@@ -49,6 +50,18 @@ void spriteLoad(char *file, SDL_Surface *surface, SDL_Renderer *renderer, SDL_Te
 
 }
 
+void updateLogic(GameState *game)
+{
+  game->player.y += game->player.dy;
+  game->player.dy += 0.5;
+  if(game->player.y > 300)
+  {
+    game->player.y = 300;
+    game->player.dy = 0;
+  }
+  globalTime++;
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -56,14 +69,19 @@ int main(int argc, char* argv[])
 	SDL_Window *window = NULL; //create a window to display on
 	SDL_Renderer *renderer = NULL; //renderer for SDL
 	SDL_Surface *enemySurface = NULL; //pointer to load enemy texture
-	SDL_Surface *playerSurface = NULL;
+
 
 	//call function to launch SDL
 	initialiseSDL();
 
 	//set initial co-ordinates for player
-	gameState.player.x = 350;
-	gameState.player.y = 250;
+	gameState.player.x = 400;
+	gameState.player.y = 300;
+	gameState.player.currentSprite = 4;
+	gameState.player.facingLeft = 1;
+	gameState.player.jumping = 0;
+
+
 
 
 	//create an application window
@@ -77,13 +95,20 @@ int main(int argc, char* argv[])
 	//create renderer with vsync to prevent screen tearing
 	renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 
-
-	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.mario));
-
-
+	//load sprites and animated frames.
+//	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.player[0]));
+//	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.player[1]));
+//	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.player[2]));
+//	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.player[3]));
 	spriteLoad("gfx/oct.png", enemySurface, renderer, &(gameState.enemy));
 
-
+	SDL_Surface *sheet = IMG_Load("gfx/sheet.png");
+	if (sheet == NULL)
+	{
+		printf("failed to load sheet for sprite\n");
+	}
+	gameState.player.sheetTexture = SDL_CreateTextureFromSurface(renderer, sheet);
+	SDL_FreeSurface(sheet);
 	//flag for event loop for program
 	int done = 0;
 
@@ -95,11 +120,13 @@ int main(int argc, char* argv[])
 		{
 			done = 1;
 		}
+		updateLogic(&gameState);
 		doRender(renderer, &gameState);
+		//SDL_Delay(10);
 	}//while(!done)
 
 	//clean up textures
-	SDL_DestroyTexture(gameState.enemy);
+	SDL_DestroyTexture(gameState.player.sheetTexture);
 
 	//destroy SDL elements to free up memory once done.
 	SDL_DestroyWindow(window);
