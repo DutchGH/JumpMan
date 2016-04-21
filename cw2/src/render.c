@@ -23,7 +23,10 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 
 	//create a rectangle in the centre with defined co-ordinates
 	SDL_Rect playerRect = {game->player.x,game->player.y,50,50};
-	SDL_RenderFillRect(renderer, &playerRect);
+//	SDL_RenderFillRect(renderer, &playerRect);
+	//allows sprite to be displayed instead of a rectangle
+	SDL_RenderCopy(renderer, game->mario, NULL, &playerRect);
+
 
 	//create sprite for enemy
 	SDL_Rect enemyRect = {50,50,106,120};

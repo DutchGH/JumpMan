@@ -46,19 +46,19 @@ int processEvents(SDL_Window *window, GameState *game)
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if(state[SDL_SCANCODE_LEFT])
 	{
-		game->player.x -= 10; //move player left
+		game->player.x -= 5; //move player left
 	}
 	if(state[SDL_SCANCODE_RIGHT])
 	{
-		game->player.x += 10; //move player right
+		game->player.x += 5; //move player right
 	}
 	if(state[SDL_SCANCODE_UP])
 	{
-		game->player.y -=10; //move player up
+		game->player.y -=5; //move player up
 	}
 	if(state[SDL_SCANCODE_DOWN])
 	{
-		game->player.y +=10; //move player down
+		game->player.y +=5; //move player down
 	}
 
 	return done;

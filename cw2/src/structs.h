@@ -31,6 +31,7 @@ typedef struct gameState
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
 
+	SDL_Texture *sprite;
 	SDL_Texture *mario; //texture for player - Animations TBI
 	SDL_Texture *enemy; //texture for enemy
 	SDL_Renderer *renderer;
