@@ -46,6 +46,7 @@ int processEvents(SDL_Window *window, GameState *game)
 	const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if(state[SDL_SCANCODE_LEFT])
 	{
+
 		game->player.x -= 5; //move player left
 	}
 	if(state[SDL_SCANCODE_RIGHT])

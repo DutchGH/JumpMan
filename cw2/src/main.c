@@ -32,7 +32,7 @@ void initialiseSDL()
 }
 
 //function to call and load sprite
-void spriteLoad(char *file, SDL_Surface *surface, SDL_Renderer *renderer, GameState *game, char *object)
+void spriteLoad(char *file, SDL_Surface *surface, SDL_Renderer *renderer, SDL_Texture **object)
 {
 	//load sprite for enemy
 	surface = IMG_Load(file);
@@ -43,16 +43,8 @@ void spriteLoad(char *file, SDL_Surface *surface, SDL_Renderer *renderer, GameSt
 		exit(1);
 	}
 
-	//load texture for renderer
-	if(strcmp(object,"mario") == 0)
-	{
-		game->mario = SDL_CreateTextureFromSurface(renderer, surface);
-	}
-	if(strcmp(object, "enemy") == 0)
-	{
-		game->enemy = SDL_CreateTextureFromSurface(renderer, surface);
-	}
-	//free the surface as its no longer necessary
+	//load texture onto sprite
+	(*object) = SDL_CreateTextureFromSurface(renderer, surface);
 	SDL_FreeSurface(surface);
 
 }
@@ -86,34 +78,11 @@ int main(int argc, char* argv[])
 	renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED|SDL_RENDERER_PRESENTVSYNC);
 
 
-	spriteLoad("gfx/megaman.png", playerSurface, renderer, &gameState, "mario");
-//	playerSurface = IMG_Load("gfx/megaman.png");
-//		if(playerSurface == NULL)
-//		{
-//			printf("Cannot find megaman.png!\n");
-//			SDL_Quit();
-//			return 1;
-//		}
-//
-//		//load texture for renderer
-//		gameState.mario = SDL_CreateTextureFromSurface(renderer, playerSurface);
-//		//free the surface as its no longer necessary
-//		SDL_FreeSurface(playerSurface);
+	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.mario));
 
-spriteLoad("gfx/oct.png", enemySurface, renderer, &gameState, "enemy");
-//	//load sprite for enemy
-//	enemySurface = IMG_Load("gfx/megaman.png");
-//	if(enemySurface == NULL)
-//	{
-//		printf("Cannot find megaman.png!\n");
-//		SDL_Quit();
-//		return 1;
-//	}
-//
-//	//load texture for renderer
-//	gameState.enemy = SDL_CreateTextureFromSurface(renderer, enemySurface);
-//	//free the surface as its no longer necessary
-//	SDL_FreeSurface(enemySurface);
+
+	spriteLoad("gfx/oct.png", enemySurface, renderer, &(gameState.enemy));
+
 
 	//flag for event loop for program
 	int done = 0;
