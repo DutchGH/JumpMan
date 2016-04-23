@@ -14,23 +14,13 @@
 
 #define TILE_SIZE 32
 #define SCROLL_SPEED 4
-typedef struct movement
-{
-	int up;
-	int down;
-	int left;
-	int right;
-	int jumping;
-}Movement;
 typedef struct player
 {
-	Movement playerMovement;
-	float x, y; //co-ordinates of player
+	int x, y; //co-ordinates of player
 	float dy; //used for physics
-	int currentSprite, walking, facingLeft, visible, jumping;
+	int currentSprite, walking, facingLeft, shooting, visible, jumping;
 	short life; //lives of player
 	char *name; //name of player
-	int onLedge;
 
 	SDL_Texture *sheetTexture;
 }Player;

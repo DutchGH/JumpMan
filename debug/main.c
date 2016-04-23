@@ -77,12 +77,9 @@ int main(int argc, char* argv[])
 	//set initial co-ordinates for player
 	gameState.player.x = 400;
 	gameState.player.y = 300;
-	//gameState.player.dy = 0;
-	gameState.player.onLedge = 0;
-	gameState.player.playerMovement.jumping = 0;
+	gameState.player.currentSprite = 4;
 	gameState.player.facingLeft = 1;
-	gameState.player.playerMovement.left = 0;
-	gameState.player.playerMovement.right = 0;
+	gameState.player.jumping = 0;
 
 
 
@@ -105,7 +102,7 @@ int main(int argc, char* argv[])
 //	spriteLoad("gfx/megaman.png", playerSurface, renderer, &(gameState.player[3]));
 	spriteLoad("gfx/oct.png", enemySurface, renderer, &(gameState.enemy));
 
-	SDL_Surface *sheet = IMG_Load("spritesheetmod.png");
+	SDL_Surface *sheet = IMG_Load("gfx/spritesheetmod.png");
 	if (sheet == NULL)
 	{
 		printf("failed to load sheet for sprite\n");
