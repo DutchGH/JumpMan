@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "structs.h"
@@ -38,16 +39,16 @@ int processEvents(SDL_Window *window, GameState *game)
 			case SDLK_UP:
 				if(!game->player.playerMovement.jumping)
 				{
-					game->player.playerMovement.jumping = 1;
+					game->player.playerMovement.jumping = true;
 					printf("Jumping %g\n", game->player.dy);
 				}
 
 				break;
 			case SDLK_LEFT:
-				game->player.playerMovement.left = 1;
+				game->player.playerMovement.left = true;
 				break;
 			case SDLK_RIGHT:
-				game->player.playerMovement.right = 1;
+				game->player.playerMovement.right = true;
 				break;
 			}
 			break;
@@ -56,14 +57,14 @@ int processEvents(SDL_Window *window, GameState *game)
 			{
 			case SDLK_UP:
 			{
-				game->player.playerMovement.jumping = 0;
+				game->player.playerMovement.jumping = false;
 			}
 			break;
 			case SDLK_LEFT:
-				game->player.playerMovement.left = 0;
+				game->player.playerMovement.left = false;
 				break;
 			case SDLK_RIGHT:
-				game->player.playerMovement.right = 0;
+				game->player.playerMovement.right = false;
 				break;
 			}
 			break;
@@ -73,7 +74,7 @@ int processEvents(SDL_Window *window, GameState *game)
 		}//event type switch
 	}//Wait for event...
 
-	  const Uint8 *state = SDL_GetKeyboardState(NULL);
+	  //const Uint8 *state = SDL_GetKeyboardState(NULL);
 	if(game->player.playerMovement.left)
 	{
 		game->player.x -= 5; //move player left
@@ -106,12 +107,8 @@ int processEvents(SDL_Window *window, GameState *game)
 
 	if(game->player.playerMovement.jumping && game->player.dy)
 	{
-		if(game->player.dy < 0)
-		{
-			game->player.playerMovement.jumping = 0;
-		}
 			game->player.dy = -8;
-
+			game->player.playerMovement.jumping = false;
 	}
 
 

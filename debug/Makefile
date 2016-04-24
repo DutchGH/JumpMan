@@ -31,8 +31,8 @@ clean:
 
 # dependencies
 
-main.o:  main.c structs.h events.h render.h 
+main.o:  main.c structs.h events.h render.h map.h
 events.o:  events.c structs.h events.h render.h 
 map.o: map.c structs.h events.h render.h 
-render.o:  render.c structs.h events.h render.h 
+render.o:  render.c structs.h events.h render.h map.h
 

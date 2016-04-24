@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "structs.h"
@@ -35,17 +36,46 @@ int processEvents(SDL_Window *window, GameState *game)
 			case SDLK_ESCAPE:
 				done = 1;
 				break;
+			case SDLK_UP:
+				if(!game->player.playerMovement.jumping)
+				{
+					game->player.playerMovement.jumping = true;
+					printf("Jumping %g\n", game->player.dy);
+				}
+
+				break;
+			case SDLK_LEFT:
+				game->player.playerMovement.left = true;
+				break;
+			case SDLK_RIGHT:
+				game->player.playerMovement.right = true;
+				break;
 			}
 			break;
-
+		case SDL_KEYUP:
+			switch(event.key.keysym.sym)
+			{
+			case SDLK_UP:
+			{
+				game->player.playerMovement.jumping = false;
+			}
+			break;
+			case SDLK_LEFT:
+				game->player.playerMovement.left = false;
+				break;
+			case SDLK_RIGHT:
+				game->player.playerMovement.right = false;
+				break;
+			}
+			break;
 		case SDL_QUIT:
 			done = 1;
 			break;
 		}//event type switch
 	}//Wait for event...
 
-	const Uint8 *state = SDL_GetKeyboardState(NULL);
-	if(state[SDL_SCANCODE_LEFT])
+	  //const Uint8 *state = SDL_GetKeyboardState(NULL);
+	if(game->player.playerMovement.left)
 	{
 		game->player.x -= 5; //move player left
 		game->player.walking = 1;
@@ -57,7 +87,7 @@ int processEvents(SDL_Window *window, GameState *game)
 			game->player.currentSprite %=8;
 		}
 	}
-	else if(state[SDL_SCANCODE_RIGHT])
+	else if(game->player.playerMovement.right)
 	{
 		game->player.x += 5;
 		game->player.walking = 1;
@@ -75,10 +105,12 @@ int processEvents(SDL_Window *window, GameState *game)
 		game->player.currentSprite = 9;
 	}
 
-	if(state[SDL_SCANCODE_UP] && !game->player.dy)
+	if(game->player.playerMovement.jumping && game->player.dy)
 	{
-		game->player.dy = -10;
+			game->player.dy = -8;
+			game->player.playerMovement.jumping = false;
 	}
+
 
 
 

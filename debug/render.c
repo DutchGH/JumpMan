@@ -7,11 +7,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
 #include "structs.h"
 #include "events.h"
 #include "render.h"
+#include "map.h"
 //draw a blue background with a white square in the centre
 
 
@@ -21,9 +23,9 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 	//clear screen to blue
 	SDL_RenderClear(renderer);
 
+	drawMap(game);
 	//set drawing colour to white
-	//SDL_SetRenderDrawColor(renderer,255,255,255,255);
-	//create a rectangle in the centre with defined co-ordinates
+
 	SDL_Rect srcRect = { 60*game->player.currentSprite, 0, 60, 99 };
 	SDL_Rect rect = { game->player.x, game->player.y, 60, 99 };
 	SDL_RenderCopyEx(renderer, game->player.sheetTexture, &srcRect, &rect, 0, NULL, game->player.facingLeft);

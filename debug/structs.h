@@ -7,20 +7,32 @@
 
 #ifndef STRUCTS_H_
 #define STRUCTS_H_
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-#define MAX_MAP_X 40
-#define MAX_MAP_Y 30
-
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+#define MAX_MAP_X 400
+#define MAX_MAP_Y 300
+#define MAX_TILES 10
 #define TILE_SIZE 32
-#define SCROLL_SPEED 4
+#define SCROLL_SPEED 8
+
+typedef struct movement
+{
+	bool up;
+	bool down;
+	bool left;
+	bool right;
+	bool jumping;
+}Movement;
+
 typedef struct player
 {
-	int x, y; //co-ordinates of player
+	Movement playerMovement;
+	float x, y; //co-ordinates of player
 	float dy; //used for physics
-	int currentSprite, walking, facingLeft, shooting, visible, jumping;
+	int currentSprite, walking, facingLeft, visible;
 	short life; //lives of player
 	char *name; //name of player
+	int onLedge;
 
 	SDL_Texture *sheetTexture;
 }Player;
@@ -30,8 +42,10 @@ typedef struct enemy
 	int x,y; //co-ordinates of enemy
 }Enemy;
 
+
 typedef struct map
 {
+	char *fileName;
 	int startX, startY;
 	int maxX, maxY;
 	int tile[MAX_MAP_Y][MAX_MAP_X];
@@ -40,8 +54,12 @@ typedef struct map
 //loads all players and sprites
 typedef struct gameState
 {
+	Map map;
+	SDL_Renderer *renderer;
+
 	//player
 	Player player;
+
 
 	//enemy type one - currently a placeholder megaman sprite
 	Enemy megaman[10];
@@ -49,11 +67,10 @@ typedef struct gameState
 	Enemy sprog[50]; //enemy type 2
 
 	//objects for map creation
-	SDL_Texture *brickImage;
-
-	SDL_Texture *player1[4]; //texture for player - Animations TBI
+	SDL_Texture *player1;
+	SDL_Surface *brickImages[MAX_TILES];
+	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
-	SDL_Renderer *renderer;
 }GameState;
 
 #endif /* STRUCTS_H_ */
