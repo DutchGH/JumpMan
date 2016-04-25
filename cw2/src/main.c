@@ -97,8 +97,10 @@ void loadGame(GameState *game)
 
 void updateLogic(GameState *game)
 {
+
+
   game->player.y += game->player.dy;
-  game->player.dy += 0.5;
+  game->player.dy -= 0.5;
   if(game->player.y > 300)
   {
     game->player.y = 300;

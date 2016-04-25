@@ -47,8 +47,10 @@ void loadMap(GameState *game, char *name)
 	{
 		for (x=0;x<MAX_MAP_X;x++)
 		{
+			//TODO: terminal gave a warning here. Might be worth seeing why....
+			//BUG REPORT - ONLY THE FIRST COUPLE OF LINES ARE LOADED INTO GAME.
 			fscanf(fp, "%d", &(game->map.tile[y][x]));
-			//printf("Tile Scanned @ %d %d\n", x, y);
+			printf("Tile Scanned @ %d %d\n", x, y);
 
 			if (game->map.tile[y][x] > 0)
 			{

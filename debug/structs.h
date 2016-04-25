@@ -22,6 +22,7 @@ typedef struct movement
 	bool left;
 	bool right;
 	bool jumping;
+	bool falling;
 }Movement;
 
 typedef struct player
@@ -33,6 +34,7 @@ typedef struct player
 	short life; //lives of player
 	char *name; //name of player
 	int onLedge;
+	int jumpCount;
 
 	SDL_Texture *sheetTexture;
 }Player;

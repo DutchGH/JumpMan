@@ -36,15 +36,19 @@ int processEvents(SDL_Window *window, GameState *game)
 			case SDLK_ESCAPE:
 				break;
 			case SDLK_UP:
-				if(game->player.jumpCount == 2)
+				//if player is not yet already double-jumping:
+				if(game->player.jumpCount <2)
 				{
-					game->player.playerMovement.jumping = false;
-					game->player.jumpCount = 0;
+					//
+					game->player.dy = 15;
+					game->player.playerMovement.jumping = true;
+					game->player.jumpCount++;
 				}
+				//or, if the player is mid single-jump, and the player has released and pressed the jump key,
 				else if(!game->player.playerMovement.jumping && event.key.repeat == 0)
 				{
 					game->player.playerMovement.jumping = true;
-					//game->player.jumpCount++;
+//					game->player.jumpCount++;
 				}
 
 				break;
@@ -109,11 +113,7 @@ int processEvents(SDL_Window *window, GameState *game)
 		game->player.currentSprite = 9;
 	}
 
-	if(game->player.playerMovement.jumping && game->player.dy)
-	{
-			game->player.dy = -12;
-			game->player.playerMovement.jumping = false;
-	}
+
 
 
 

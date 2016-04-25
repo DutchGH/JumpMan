@@ -34,15 +34,18 @@ int processEvents(SDL_Window *window, GameState *game)
 			switch(event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				done = 1;
 				break;
 			case SDLK_UP:
-				if(!game->player.playerMovement.jumping)
+				//if player is not yet already double-jumping:
+				if(game->player.jumpCount < 2 && event.key.repeat == 0)
 				{
+					//
+					printf("Jumping\n");
+					game->player.dy = -10;
 					game->player.playerMovement.jumping = true;
-					printf("Jumping %g\n", game->player.dy);
+					game->player.jumpCount++;
 				}
-
+		
 				break;
 			case SDLK_LEFT:
 				game->player.playerMovement.left = true;
@@ -105,11 +108,7 @@ int processEvents(SDL_Window *window, GameState *game)
 		game->player.currentSprite = 9;
 	}
 
-	if(game->player.playerMovement.jumping && game->player.dy)
-	{
-			game->player.dy = -8;
-			game->player.playerMovement.jumping = false;
-	}
+
 
 
 

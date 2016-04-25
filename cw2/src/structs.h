@@ -22,6 +22,7 @@ typedef struct movement
 	bool left;
 	bool right;
 	bool jumping;
+	bool falling;
 }Movement;
 
 typedef struct player
