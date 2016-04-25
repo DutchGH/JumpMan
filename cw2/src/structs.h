@@ -33,6 +33,7 @@ typedef struct player
 	short life; //lives of player
 	char *name; //name of player
 	int onLedge;
+	int jumpCount;
 
 	SDL_Texture *sheetTexture;
 }Player;

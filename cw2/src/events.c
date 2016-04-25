@@ -34,13 +34,17 @@ int processEvents(SDL_Window *window, GameState *game)
 			switch(event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				done = 1;
 				break;
 			case SDLK_UP:
-				if(!game->player.playerMovement.jumping)
+				if(game->player.jumpCount == 2)
+				{
+					game->player.playerMovement.jumping = false;
+					game->player.jumpCount = 0;
+				}
+				else if(!game->player.playerMovement.jumping && event.key.repeat == 0)
 				{
 					game->player.playerMovement.jumping = true;
-					printf("Jumping %g\n", game->player.dy);
+					//game->player.jumpCount++;
 				}
 
 				break;
@@ -107,7 +111,7 @@ int processEvents(SDL_Window *window, GameState *game)
 
 	if(game->player.playerMovement.jumping && game->player.dy)
 	{
-			game->player.dy = -8;
+			game->player.dy = -12;
 			game->player.playerMovement.jumping = false;
 	}
 

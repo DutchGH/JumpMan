@@ -90,6 +90,7 @@ void loadGame(GameState *game)
 	game->player.playerMovement.left = 0;
 	game->player.playerMovement.right = 0;
 	game->player.playerMovement.jumping = false;
+	game->player.jumpCount = 0;
 
 
 }
@@ -102,6 +103,7 @@ void updateLogic(GameState *game)
   {
     game->player.y = 300;
     game->player.dy = 0;
+    game->player.jumpCount++;
   }
   globalTime++;
 }
