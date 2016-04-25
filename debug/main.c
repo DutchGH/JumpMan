@@ -18,8 +18,8 @@
 #include "events.h"
 #include "render.h"
 #include "map.h"
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 int globalTime = 0;
 
 void initialiseSDL()
@@ -39,6 +39,8 @@ void initialiseSDL()
 void loadGame(GameState *game)
 {
 	SDL_Surface *surface = NULL;
+	
+	//LOAD THE ENEMY SPRITE
 	surface = IMG_Load("gfx/oct.png");
 	if(surface == NULL)
 	{
@@ -50,7 +52,7 @@ void loadGame(GameState *game)
 	game->enemy = SDL_CreateTextureFromSurface(game->renderer, surface);
 	SDL_FreeSurface(surface);
 
-
+	//LOAD THE SPRITE SHEET
 	surface = IMG_Load("spritesheetmod.png");
 	if(surface == NULL)
 	{
@@ -58,12 +60,13 @@ void loadGame(GameState *game)
 		SDL_Quit();
 		exit(1);
 	}
-
+	
 	game->player.sheetTexture = SDL_CreateTextureFromSurface(game->renderer, surface);
 	printf("sheet loaded");
 	SDL_FreeSurface(surface);
 
-	surface = IMG_Load("gfx/brick.png");
+	//LOAD THE BRICK TEXTURE
+	surface = IMG_Load("gfx/greybrick.png");
 	if(surface == NULL)
 	{
 		fprintf(stderr, "Cannot find brick.png\n");
@@ -73,16 +76,9 @@ void loadGame(GameState *game)
 	game->brick = SDL_CreateTextureFromSurface(game->renderer, surface);
 	SDL_FreeSurface(surface);
 
-	//loadMap(game, "data/maps/map01.dat");
-
-
-
-
-
-
 	//setting inital parameters for the player
 	game->player.x = 400;
-	game->player.y = 300;
+	game->player.y = 372;
 	game->player.onLedge = 0;
 	game->player.facingLeft = 1;
 
@@ -91,7 +87,10 @@ void loadGame(GameState *game)
 	game->player.playerMovement.right = 0;
 	game->player.playerMovement.jumping = false;
 	game->player.jumpCount = 0;
-
+	
+	//load the map
+	loadMap(game);
+	
 
 }
 
@@ -101,15 +100,15 @@ void updateLogic(GameState *game)
 
   game->player.y += game->player.dy;
   game->player.dy += 0.5;
-  if(game->player.y >= 300)
+  if(game->player.y >= 372)
   {
-    game->player.y = 300;
+    game->player.y = 372;
     game->player.dy = 0;
 	game->player.jumpCount = 0; //do this only when /landing/ not when colliding.
   }
   else {
   }
-  printf("Player pos: %f\n",game->player.y);
+  //~ printf("Player pos: %f\n",game->player.y);
   globalTime++;
 }
 
@@ -119,7 +118,6 @@ int main(int argc, char* argv[])
 	GameState gameState; //create a new gamestate (with all containing sprites and elements)
 	SDL_Window *window = NULL; //create a window to display on
 	SDL_Renderer *renderer = NULL; //renderer for SDL
-	//SDL_Surface *enemySurface = NULL; //pointer to load enemy texture
 
 
 	//call function to launch SDL

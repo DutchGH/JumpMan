@@ -7,8 +7,8 @@
 
 #ifndef STRUCTS_H_
 #define STRUCTS_H_
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
+#define SCREEN_WIDTH 800
+#define SCREEN_HEIGHT 600
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 300
 #define MAX_TILES 10
@@ -44,33 +44,33 @@ typedef struct enemy
 	int x,y; //co-ordinates of enemy
 }Enemy;
 
-
-typedef struct map
+//parameters for map generation
+typedef struct Map
 {
-	char *fileName;
-	int startX, startY;
-	int maxX, maxY;
-	int tile[MAX_MAP_Y][MAX_MAP_X];
-}Map;
+	int startX, startY; //starting coordinates
+	int maxX, maxY; //max coordinates
+} Map;
 
-//loads all players and sprites
+//parameters for the ledge
+typedef struct Ledge
+{
+  int x, y, w, h;
+} Ledge;
+
+//gamestate struct - used to load all the sprites and textures.
 typedef struct gameState
 {
-	Map map;
 	SDL_Renderer *renderer;
-
+	Map map;
 	//player
 	Player player;
 
-
-	//enemy type one - currently a placeholder megaman sprite
-	Enemy megaman[10];
+	
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
+	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
 
 	//objects for map creation
-	SDL_Texture *player1;
-	SDL_Surface *brickImages[MAX_TILES];
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
 }GameState;

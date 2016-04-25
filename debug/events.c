@@ -21,7 +21,7 @@ int processEvents(SDL_Window *window, GameState *game)
 	while(SDL_PollEvent(&event))
 	{//Wait for Event...
 		switch(event.type)
-		{//event type switch
+		{//event type switch|
 		case SDL_WINDOWEVENT_CLOSE:
 			if(window)
 			{//if(window)
@@ -40,7 +40,7 @@ int processEvents(SDL_Window *window, GameState *game)
 				if(game->player.jumpCount < 2 && event.key.repeat == 0)
 				{
 					//
-					printf("Jumping\n");
+					//printf("Jumping\n");
 					game->player.dy = -10;
 					game->player.playerMovement.jumping = true;
 					game->player.jumpCount++;
@@ -58,11 +58,6 @@ int processEvents(SDL_Window *window, GameState *game)
 		case SDL_KEYUP:
 			switch(event.key.keysym.sym)
 			{
-			case SDLK_UP:
-			{
-				game->player.playerMovement.jumping = false;
-			}
-			break;
 			case SDLK_LEFT:
 				game->player.playerMovement.left = false;
 				break;
@@ -77,33 +72,40 @@ int processEvents(SDL_Window *window, GameState *game)
 		}//event type switch
 	}//Wait for event...
 
-	  //const Uint8 *state = SDL_GetKeyboardState(NULL);
-	if(game->player.playerMovement.left)
+
+	// MOVEMENT CONTROLS
+	if(game->player.playerMovement.left) //if player is holding left
 	{
+		//move him left and flip the sprite
 		game->player.x -= 5; //move player left
 		game->player.walking = 1;
 		game->player.facingLeft = 1;
 
 		if (globalTime%10 == 0)
 		{
+			//increment the sprite sheet 
 			game->player.currentSprite++;
 			game->player.currentSprite %=8;
 		}
 	}
 	else if(game->player.playerMovement.right)
 	{
+		//move player left
 		game->player.x += 5;
 		game->player.walking = 1;
 		game->player.facingLeft = 0;
 
 		if (globalTime%10 == 0)
 		{
+			//shift sprite with gametime
 			game->player.currentSprite++;
 			game->player.currentSprite %=8;
 		}
 	}
+	//if player is stationary
 	else
 	{
+		//set defult sprite and stop his movement 
 		game->player.walking = 0;
 		game->player.currentSprite = 9;
 	}
