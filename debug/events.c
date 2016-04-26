@@ -34,6 +34,7 @@ int processEvents(SDL_Window *window, GameState *game)
 			switch(event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
+				SDL_Quit();
 				break;
 			case SDLK_UP:
 				//if player is not yet already double-jumping:
@@ -41,7 +42,7 @@ int processEvents(SDL_Window *window, GameState *game)
 				{
 					//
 					//printf("Jumping\n");
-					game->player.dy = -10;
+					game->player.dy = -8;
 					game->player.playerMovement.jumping = true;
 					game->player.jumpCount++;
 				}

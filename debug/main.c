@@ -38,43 +38,12 @@ void initialiseSDL()
 
 void loadGame(GameState *game)
 {
-	SDL_Surface *surface = NULL;
 	
-	//LOAD THE ENEMY SPRITE
-	surface = IMG_Load("gfx/oct.png");
-	if(surface == NULL)
-	{
-		fprintf(stderr, "Cannot find oct.png\n");
-		SDL_Quit();
-		exit(1);
-	}
+	game->enemy = IMG_LoadTexture(game->renderer, "gfx/oct.png");
 
-	game->enemy = SDL_CreateTextureFromSurface(game->renderer, surface);
-	SDL_FreeSurface(surface);
+	game->player.sheetTexture = IMG_LoadTexture(game->renderer, "spritesheetmod.png");
 
-	//LOAD THE SPRITE SHEET
-	surface = IMG_Load("spritesheetmod.png");
-	if(surface == NULL)
-	{
-		fprintf(stderr, "Cannot find spritesheetmod.png\n");
-		SDL_Quit();
-		exit(1);
-	}
-	
-	game->player.sheetTexture = SDL_CreateTextureFromSurface(game->renderer, surface);
-	printf("sheet loaded");
-	SDL_FreeSurface(surface);
-
-	//LOAD THE BRICK TEXTURE
-	surface = IMG_Load("gfx/greybrick.png");
-	if(surface == NULL)
-	{
-		fprintf(stderr, "Cannot find brick.png\n");
-		SDL_Quit();
-		exit(1);
-	}
-	game->brick = SDL_CreateTextureFromSurface(game->renderer, surface);
-	SDL_FreeSurface(surface);
+	game->brick = IMG_LoadTexture(game->renderer, "gfx/greybrick.png");
 
 	//setting inital parameters for the player
 	game->player.x = 400;
@@ -132,7 +101,7 @@ int main(int argc, char* argv[])
 							   0);							//flags
 
 	//create renderer with vsync to prevent screen tearing
-	renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED);
+	renderer = SDL_CreateRenderer(window,-1,SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
 	//make sure all elements are renered in the same window
 	gameState.renderer = renderer;
@@ -148,12 +117,13 @@ int main(int argc, char* argv[])
 	done = processEvents(window, &gameState);
 	updateLogic(&gameState);
 	doRender(renderer, &gameState);
-	SDL_Delay(10);
+	//SDL_Delay(10);
 
 	}//while(!done)
 
 	//clean up textures
 	SDL_DestroyTexture(gameState.player.sheetTexture);
+	SDL_DestroyTexture(gameState.enemy);
 
 	//destroy SDL elements to free up memory once done.
 	SDL_DestroyWindow(window);
