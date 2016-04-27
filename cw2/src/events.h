@@ -9,6 +9,4 @@
 #define EVENTS_H_
 int processEvents(SDL_Window *window, GameState *game);
 
-
-
 #endif /* EVENTS_H_ */

@@ -15,52 +15,66 @@
 #include "events.h"
 #include "render.h"
 
-SDL_Surface *mapImages[MAX_TILES];
-
-void drawImage(GameState *game, SDL_Surface *image, SDL_Renderer *renderer, int x, int y)
+//MAP HERE, 1 indicated a tile, 0 indicates a blank space. Can be adjusted
+int mapArray[30][40] = 
 {
-	//create a rectangle for the tile
-	SDL_Rect tileRect = { x, y, 32, 32 };
-	SDL_RenderCopy(renderer, game->brick, NULL, &tileRect);
-}
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,},
+    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1,1,1,1,1,1,1,1,1,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,}
+};
 
-void loadMap(GameState *game, char *name)
+
+void loadMap(GameState *game)
 {
-	int x, y;
-	FILE *fp;
-
-	fp = fopen(name, "rb");
-
-	//error checking
-	if (fp == NULL)
-	{
-		printf("Failed to open map %s\n", name);
-
-		exit(1);
-	}
-
-	// Read the data from the file into the map
+	int x, y; //declare co-ordinates for looping
 
 	game->map.maxX = game->map.maxY = 0;
 
-	for (y=0;y<MAX_MAP_Y;y++)
+	for (y=0;y<30;y++)
 	{
-		for (x=0;x<MAX_MAP_X;x++)
+		for (x=0;x<40;x++)
 		{
-			//TODO: terminal gave a warning here. Might be worth seeing why....
-			//BUG REPORT - ONLY THE FIRST COUPLE OF LINES ARE LOADED INTO GAME.
-			fscanf(fp, "%d", &(game->map.tile[y][x]));
-			printf("Tile Scanned @ %d %d\n", x, y);
-
-			if (game->map.tile[y][x] > 0)
+            //printf("%d\n", mapArray[y][x]);
+			if (mapArray[y][x] > 0)
 			{
 				if (x > game->map.maxX)
 				{
-					game->map.maxX = x;
+					//if this co-ordinate is larger than the current max
+                    //set a new co-ordinate
+                    game->map.maxX = x; 
 				}
 
 				if (y > game->map.maxY)
 				{
+                    //if this co-ordinate is larger than the current max
+                    //set a new co-ordinate
 					game->map.maxY = y;
 				}
 			}
@@ -78,29 +92,21 @@ void loadMap(GameState *game, char *name)
 
 	game->map.startX = game->map.startY = 0;
 
-
-
-	/* Close the file afterwards */
-	//printf("file closed\n");
-	fclose(fp);
 }
 
 void drawMap(GameState*game)
 {
 	int x, y, mapX, x1, x2, mapY, y1, y2;
-
+    int tileNumber = 0;
+    //calculate start and end points of the map
 	mapX = game->map.startX / TILE_SIZE;
 	x1 = (game->map.startX % TILE_SIZE) * -1;
-	printf("x1 %d\n", x1);
 	x2 = x1 + SCREEN_WIDTH + (x1 == 0 ? 0 : TILE_SIZE);
-	printf("x2 %d\n", x2);
 
 	mapY = game->map.startY / TILE_SIZE;
 	y1 = (game->map.startY % TILE_SIZE) * -1;
-	printf("y1 %d\n", y1);
 
 	y2 = y1 + SCREEN_HEIGHT + (y1 == 0 ? 0 : TILE_SIZE);
-	printf("y2 %d\n", y2);
 
 
 
@@ -113,18 +119,33 @@ void drawMap(GameState*game)
 
 		for (x=x1;x<x2;x+=TILE_SIZE)
 		{
-			if (game->map.tile[mapY][mapX] != 0)
+            //if the array shows a 1 on the map
+			if (mapArray[mapY][mapX] != 0)
 			{
-				printf("FOUND A TILE @ %d %d\n", x,y);
-				drawImage(game, game->brickImages[game->map.tile[mapY][mapX]], game->renderer, x, y);
+                //printf("%d\n",mapArray[mapY][mapX]);
+                //set the coordinates for the tile
+                game->ledge[tileNumber].x = x;
+                game->ledge[tileNumber].y = y;
+                game->ledge[tileNumber].w = TILE_SIZE;
+                game->ledge[tileNumber].h = TILE_SIZE;
+                game->ledge[tileNumber].bx = x;
+                game->ledge[tileNumber].by = y;
+                printf("%d\n",tileNumber);
+                //printf("%d %d\n", x, y);
+                //create and place a tile
+                SDL_Rect ledgeRect = {x, y, TILE_SIZE, TILE_SIZE};
+                SDL_RenderCopy(game->renderer, game->brick, NULL, &ledgeRect);
 			}
-
+            //move to the next tile
+			tileNumber++;
 			mapX++;
 //			printf("map X %d\n", mapX);
 		}
 		mapY++;
 //		printf("mapy %d\n", mapY);
 	}
+	game->tileCount = tileNumber;
+	printf("%d\n", game->tileCount);
 }
 
 

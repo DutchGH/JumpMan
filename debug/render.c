@@ -23,7 +23,8 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 	//clear screen to grey
 	SDL_RenderClear(renderer);
 	
-	drawMap(game);
+    drawMap(game);
+	
 
 	SDL_Rect srcRect = { 60*game->player.currentSprite, 0, 60, 99 };
 	SDL_Rect rect = { game->player.x, game->player.y, 30, 50 };

@@ -7,9 +7,8 @@
 
 #ifndef MAP_H_
 #define MAP_H_
-void drawImage(GameState *game, SDL_Surface *image, SDL_Renderer *renderer, int x, int y);
-void loadMap(GameState *game, char *name);
-void loadMapTiles(GameState *game);
+int mapArray[30][40];
+void loadMap(GameState *game);
 void drawMap(GameState*game);
 
 

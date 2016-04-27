@@ -21,7 +21,7 @@ typedef struct movement
 	bool down;
 	bool left;
 	bool right;
-	bool jumping;
+	bool jump;
 	bool falling;
 }Movement;
 
@@ -29,11 +29,13 @@ typedef struct player
 {
 	Movement playerMovement;
 	float x, y; //co-ordinates of player
-	float dy; //used for physics
+	int w,h;
+	float dx, dy; //used for physics
 	int currentSprite, walking, facingLeft, visible;
 	short life; //lives of player
 	char *name; //name of player
 	int onLedge;
+	int thinkTime;
 	int jumpCount;
 
 	SDL_Texture *sheetTexture;
@@ -48,7 +50,7 @@ typedef struct enemy
 typedef struct Map
 {
 	int startX, startY; //starting coordinates
-	int maxX, maxY; //max coordinates
+	int maxX, maxY; //max coordinates 
 } Map;
 
 //parameters for the ledge
@@ -68,11 +70,14 @@ typedef struct gameState
 	
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
+	int numberOfLedges;
 	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
 
+	SDL_Rect *ledgeRect;
 	//objects for map creation
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
+	
 }GameState;
 
 #endif /* STRUCTS_H_ */

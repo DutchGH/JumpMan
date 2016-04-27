@@ -42,8 +42,8 @@ int processEvents(SDL_Window *window, GameState *game)
 				{
 					//
 					//printf("Jumping\n");
-					game->player.dy = -8;
-					game->player.playerMovement.jumping = true;
+					game->player.dy = -10;
+					game->player.playerMovement.jump = true;
 					game->player.jumpCount++;
 				}
 		
