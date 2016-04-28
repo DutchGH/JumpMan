@@ -107,11 +107,5 @@ int processEvents(SDL_Window *window, GameState *game)
 		}
 	}
 
-
-
-
-
-
-
 	return done;
 }

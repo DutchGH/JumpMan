@@ -26,6 +26,14 @@
 
 #define PLAYER_SPEED 4
 
+//TODO: Center entity on map for scrolling
+//TODO: Add enemy sprites - design new sprite
+//TODO: Implement SDL_TTF for life counter/menu screens.
+//TODO: Implement SDL_Sound for SFX/Music.
+//TODO: Add collision detection for out of bounds areas and enemies.
+//TODO: Modularise your init and collisiondetection functions.
+
+
 void initialiseSDL()
 {
 	//initialise SDL
