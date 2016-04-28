@@ -51,9 +51,9 @@ void loadGame(GameState *game)
 	game->brick = IMG_LoadTexture(game->renderer, "gfx/greybrick.png");
 
 	//setting inital parameters for the player
-    game->player.x = 320 - 40;
-    game->player.y = 240 - 40;
-    //game->player.dx = 0;
+//    game->player.x = 320 - 40;
+//    game->player.y = 240 - 40;
+    game->player.dx = 0;
     game->player.dy = 0;
     game->player.onLedge = 0;
     game->player.slowingDown = 0;
@@ -82,13 +82,13 @@ void updateLogic(GameState *game)
 
 void collisionDetect(GameState *game)
 {
+  float mw = 32, mh = 50;
   //Check for collision with any ledges (brick blocks)
   for(int i = 0; i < 664; i++)
   {
 	float bx = game->ledge[i].bx;
-	printf("ledge %d: %g\n", i, bx);
+	//printf("ledge %d: %g\n", i, bx);
 	float by = game->ledge[i].by;
-    float mw = 30, mh = 50;
     float mx = game->player.x, my = game->player.y;
     float bw = 32, bh = 32;
     //printf("%g %g %g %g\n",bw, by, bw, bw);
@@ -130,9 +130,10 @@ void collisionDetect(GameState *game)
         //correct x
         game->player.x = bx+bw;
         mx = bx+bw;
-
-        game->player.x = 0;
-        game->player.dy = 0;
+        //printf("Collided against left!\n");
+        game->player.dx = 0;
+		game->player.walking = 0;
+		game->player.currentSprite = 9;
       }
       //rubbing against left edge
       else if(mx+mw > bx && mx < bx && game->player.dx > 0)
@@ -140,9 +141,12 @@ void collisionDetect(GameState *game)
         //correct x
         game->player.x = bx-mw;
         mx = bx-mw;
-
+        //printf("Collided against left!\n");
         game->player.dx = 0;
-        game->player.dy = 0;
+		game->player.walking = 0;
+		game->player.currentSprite = 9;
+
+
       }
     }
   }

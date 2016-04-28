@@ -130,6 +130,7 @@ void drawMap(GameState*game)
                 game->ledge[tileNumber].h = TILE_SIZE;
                 game->ledge[tileNumber].bx = x;
                 game->ledge[tileNumber].by = y;
+//                printf("x = %d, y = %d\n", x, y);
                 //printf("%d\n",tileNumber);
                 //printf("%d %d\n", x, y);
                 //create and place a tile
