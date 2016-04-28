@@ -78,7 +78,6 @@ void updateLogic(GameState *game)
 	}
 	game->player.dy += 0.5;
 	game->globalTime++;
-
 }
 
 void collisionDetect(GameState *game)
@@ -87,6 +86,7 @@ void collisionDetect(GameState *game)
   for(int i = 0; i < 664; i++)
   {
 	float bx = game->ledge[i].bx;
+	printf("ledge %d: %g\n", i, bx);
 	float by = game->ledge[i].by;
     float mw = 30, mh = 50;
     float mx = game->player.x, my = game->player.y;
@@ -131,7 +131,8 @@ void collisionDetect(GameState *game)
         game->player.x = bx+bw;
         mx = bx+bw;
 
-        game->player.dx = 0;
+        game->player.x = 0;
+        game->player.dy = 0;
       }
       //rubbing against left edge
       else if(mx+mw > bx && mx < bx && game->player.dx > 0)
@@ -141,6 +142,7 @@ void collisionDetect(GameState *game)
         mx = bx-mw;
 
         game->player.dx = 0;
+        game->player.dy = 0;
       }
     }
   }

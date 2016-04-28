@@ -29,15 +29,15 @@ typedef struct player
 {
 	Movement playerMovement;
 	float x, y; //co-ordinates of player
-	int w,h;
-	float dx, dy; //used for physics
-	int currentSprite, walking, facingLeft, visible;
+	float dx, dy; //movement velocities
 	short life; //lives of player
 	char *name; //name of player
 	int onLedge;
-	int thinkTime;
-	int jumpCount;
 
+	//used for motion
+	int currentSprite, walking, facingLeft, slowingDown;
+	int jumpCount;
+	//Texture for sprite animation
 	SDL_Texture *sheetTexture;
 }Player;
 
@@ -57,27 +57,26 @@ typedef struct Map
 typedef struct Ledge
 {
   int x, y, w, h;
+  float by, bx;
 } Ledge;
 
 //gamestate struct - used to load all the sprites and textures.
 typedef struct gameState
 {
-	SDL_Renderer *renderer;
-	Map map;
-	//player
-	Player player;
+	int globalTime;
+	Map map; //used for map
+	Player player; //creates a player
 
 	
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
-	int numberOfLedges;
 	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
-
-	SDL_Rect *ledgeRect;
+	int tileCount;
 	//objects for map creation
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
 	
+	SDL_Renderer *renderer;
 }GameState;
 
 #endif /* STRUCTS_H_ */
