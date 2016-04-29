@@ -5,15 +5,7 @@
  *  Created on: 21 Apr 2016
  *      Author: jake
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "structs.h"
-#include "events.h"
-#include "render.h"
+#include "defs.h"
 
 //MAP HERE, 1 indicated a tile, 0 indicates a blank space. Can be adjusted
 int mapArray[30][40] = 

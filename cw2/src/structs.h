@@ -7,27 +7,9 @@
 
 #ifndef STRUCTS_H_
 #define STRUCTS_H_
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-#define MAX_MAP_X 400
-#define MAX_MAP_Y 300
-#define MAX_TILES 10
-#define TILE_SIZE 32
-#define SCROLL_SPEED 8
-
-typedef struct movement
-{
-	bool up;
-	bool down;
-	bool left;
-	bool right;
-	bool jump;
-	bool falling;
-}Movement;
 
 typedef struct player
 {
-	Movement playerMovement;
 	float x, y; //co-ordinates of player
 	float dx, dy; //movement velocities
 	short life; //lives of player

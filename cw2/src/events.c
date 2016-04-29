@@ -4,13 +4,7 @@
  *  Created on: 20 Apr 2016
  *      Author: jake
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "structs.h"
+#include "defs.h"
 
 
 int processEvents(SDL_Window *window, GameState *game)
@@ -36,9 +30,12 @@ int processEvents(SDL_Window *window, GameState *game)
 			case SDLK_ESCAPE:
 				SDL_Quit();
 				break;
+			//check that the player isn't spamming the key, not jumping more than twice
+			//make sure that he's on a ledge before jumping
 			case SDLK_UP:
 			    if((game->player.jumpCount < 2 || game->player.onLedge) && event.key.repeat == 0)
 				{
+			    //increase player's terminal velocity and declare hes not on a ledge
 				  game->player.dy = -8;
 				  game->player.onLedge = 0;
 				  game->player.jumpCount++;
@@ -53,6 +50,7 @@ int processEvents(SDL_Window *window, GameState *game)
 	}//Wait for event...
 
 	  const Uint8 *state = SDL_GetKeyboardState(NULL);
+	  //give the player a little extra height when holding the up key
 	  if(state[SDL_SCANCODE_UP])
 	  {
 	    game->player.dy -= 0.2f;
@@ -61,6 +59,7 @@ int processEvents(SDL_Window *window, GameState *game)
 	  //Walking
 	  if(state[SDL_SCANCODE_LEFT])
 	  {
+		//accelerate in the left direction until max. velocity
 	    game->player.dx -= 0.5;
 	    if(game->player.dx < -6)
 	    {
@@ -77,6 +76,7 @@ int processEvents(SDL_Window *window, GameState *game)
 	  }
 	  else if(state[SDL_SCANCODE_RIGHT])
 	  {
+		//accelerate in the right direction until max. velocity
 	    game->player.dx += 0.5;
 	    if(game->player.dx > 6)
 	    {
@@ -91,7 +91,6 @@ int processEvents(SDL_Window *window, GameState *game)
 				game->player.currentSprite %=8;
 			}
 	  }
-
 
 	//if player is stationary
 	else

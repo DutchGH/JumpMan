@@ -4,18 +4,7 @@
  *  Created on: 20 Apr 2016
  *      Author: jake
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "structs.h"
-#include "events.h"
-#include "render.h"
-#include "map.h"
-//draw a blue background with a white square in the centre
-
+#include "defs.h"
 
 void doRender(SDL_Renderer *renderer, GameState *game)
 {
@@ -23,6 +12,7 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 	//clear screen to grey
 	SDL_RenderClear(renderer);
 	
+	//render the tiles of the map
     drawMap(game);
 	
 
