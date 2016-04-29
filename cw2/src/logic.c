@@ -33,6 +33,10 @@ void updateLogic(GameState *game)
 	{
 		game->scrollX = 0;
 	}
+	if(game->player.x < 0)
+	{
+		game->player.x = 0;
+	}
 }
 
 
