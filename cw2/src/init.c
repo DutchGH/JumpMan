@@ -28,7 +28,7 @@ void loadGame(GameState *game)
 
 	game->player.sheetTexture = IMG_LoadTexture(game->renderer, "spritesheetmod.png");
 
-	game->brick = IMG_LoadTexture(game->renderer, "gfx/greybrick.png");
+	game->brick = IMG_LoadTexture(game->renderer, "gfx/brick.png");
 
 	//setting inital parameters for the player
 	game->player.x = 0;
@@ -37,9 +37,7 @@ void loadGame(GameState *game)
     game->player.dy = 0;
     game->player.onLedge = 0;
     game->player.slowingDown = 0;
-
     game->player.facingLeft = 0;
-	//prevents automatic movement bug
 	game->player.jumpCount = 0;
 
 	//load the map

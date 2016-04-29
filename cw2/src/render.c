@@ -8,7 +8,7 @@
 
 void doRender(SDL_Renderer *renderer, GameState *game)
 {
-	SDL_SetRenderDrawColor(renderer, 155,155,155,255);
+	SDL_SetRenderDrawColor(renderer, 137,207,240,255);
 	//clear screen to grey
 	SDL_RenderClear(renderer);
 	
