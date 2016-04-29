@@ -58,6 +58,7 @@ typedef struct gameState
 	int tileCount;
 
 	//objects for map creation
+	SDL_Texture *bg;
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
 	SDL_Renderer *renderer;

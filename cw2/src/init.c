@@ -25,6 +25,14 @@ void loadGame(GameState *game)
     loadMap(game);
     game->globalTime = 0;
 
+    game->bg = IMG_LoadTexture(game->renderer, "gfx/bg3.png");
+	if(!game->bg)
+	{
+		printf("CANNOT FIND OCT.PNG!\n");
+		SDL_Quit();
+		exit(1);
+	}
+
 	game->enemy = IMG_LoadTexture(game->renderer, "gfx/oct.png");
 	if(!game->enemy)
 	{
