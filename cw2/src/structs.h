@@ -12,7 +12,7 @@ typedef struct player
 {
 	float x, y; //co-ordinates of player
 	float dx, dy; //movement velocities
-	short life; //lives of player
+	int lives; //lives of player
 	char *name; //name of player
 	int onLedge;
 

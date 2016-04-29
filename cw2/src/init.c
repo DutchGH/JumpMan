@@ -60,6 +60,7 @@ void loadGame(GameState *game)
 
 	game->label = NULL;
 	game->gameStatus = GAME_STATE_LIVES;
+	game->player.lives = 3;
 	//setting inital parameters for the player
 	game->player.x = 0;
 	game->player.y = 378;
