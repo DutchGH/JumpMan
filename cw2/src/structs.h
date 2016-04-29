@@ -48,6 +48,7 @@ typedef struct gameState
 	int globalTime;
 	int	gameStatus;
 	Map map; //used for map
+	float scrollX;
 	Player player; //creates a player
 
 	

@@ -23,7 +23,7 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 
 
 		SDL_Rect srcRect = { 60*game->player.currentSprite, 0, 60, 99 };
-		SDL_Rect rect = { game->player.x, game->player.y, 30, 50 };
+		SDL_Rect rect = { game->scrollX + game->player.x, game->player.y, 30, 50 };
 		SDL_RenderCopyEx(renderer, game->player.sheetTexture, &srcRect, &rect, 0, NULL, game->player.facingLeft);
 	
 	

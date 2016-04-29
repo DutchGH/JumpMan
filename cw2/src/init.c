@@ -70,6 +70,7 @@ void loadGame(GameState *game)
     game->player.slowingDown = 0;
     game->player.facingLeft = 0;
 	game->player.jumpCount = 0;
+	game->scrollX = 0;
 
 	initStatusLives(game);
 

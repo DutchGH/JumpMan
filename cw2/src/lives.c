@@ -8,9 +8,11 @@
 
 void initStatusLives(GameState *game)
 {
+	//string to print
 	char lifeString[128] = "";
 	sprintf(lifeString, "LIVES LEFT: %d",game->player.lives);
 
+	//set text colour to white
 	SDL_Color white = {255,255,255,255};
 
 	SDL_Surface *temp = TTF_RenderText_Blended(game->font, lifeString, white);

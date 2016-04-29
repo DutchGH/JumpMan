@@ -126,7 +126,7 @@ void drawMap(GameState*game)
                 //printf("%d\n",tileNumber);
                 //printf("%d %d\n", x, y);
                 //create and place a tile
-                SDL_Rect ledgeRect = {x, y, TILE_SIZE, TILE_SIZE};
+                SDL_Rect ledgeRect = {game->scrollX + x, y, TILE_SIZE, TILE_SIZE};
                 SDL_RenderCopy(game->renderer, game->brick, NULL, &ledgeRect);
 			}
             //move to the next tile

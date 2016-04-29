@@ -27,6 +27,12 @@ void updateLogic(GameState *game)
 		//impose gravity upon the player
 		game->player.dy += GRAVITY;
 	}
+
+	game->scrollX = -game->player.x+320;
+	if(game->scrollX > 0)
+	{
+		game->scrollX = 0;
+	}
 }
 
 
