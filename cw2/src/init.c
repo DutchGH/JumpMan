@@ -49,7 +49,7 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
-	game->brick = IMG_LoadTexture(game->renderer, "gfx/brick.png");
+	game->brick = IMG_LoadTexture(game->renderer, "gfx/brick2.png");
 	if(!game->brick)
 	{
 		printf("CANNOT FIND BRICK.PNG!\n");
