@@ -8,17 +8,25 @@
 
 void updateLogic(GameState *game)
 {
-	//increase co-ordinates with directional velocity
-	game->player.x += game->player.dx;
-	game->player.y += game->player.dy;
-	//reset double jump counter once player lands
-	if(game->player.onLedge == 1)
-	{
-		game->player.jumpCount = 0;
-	}
-	//impose gravity upon the player
-	game->player.dy += GRAVITY;
 	game->globalTime++;
+	if(game->globalTime > 120)
+	{
+		game->gameStatus =GAME_STATE_GAME;
+
+	}
+	if(game->gameStatus == GAME_STATE_GAME)
+	{
+		//increase co-ordinates with directional velocity
+		game->player.x += game->player.dx;
+		game->player.y += game->player.dy;
+		//reset double jump counter once player lands
+		if(game->player.onLedge == 1)
+		{
+			game->player.jumpCount = 0;
+		}
+		//impose gravity upon the player
+		game->player.dy += GRAVITY;
+	}
 }
 
 

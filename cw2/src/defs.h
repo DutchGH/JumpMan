@@ -14,6 +14,10 @@
 #define MAX_MAP_Y 300
 #define TILE_SIZE 32
 #define GRAVITY 0.5
+#define GAME_STATE_LIVES 0
+#define GAME_STATE_GAME 1
+#define GAME_STATE_GAMEOVER 2
+
 
 //LIBRARIES TO INCLUDE
 #include <stdio.h>
@@ -27,6 +31,7 @@
 #include "structs.h"
 #include "init.h"
 #include "events.h"
+#include "lives.h"
 #include "logic.h"
 #include "render.h"
 #include "map.h"

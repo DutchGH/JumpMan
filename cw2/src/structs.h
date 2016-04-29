@@ -46,6 +46,7 @@ typedef struct Ledge
 typedef struct gameState
 {
 	int globalTime;
+	int	gameStatus;
 	Map map; //used for map
 	Player player; //creates a player
 
@@ -54,11 +55,17 @@ typedef struct gameState
 	Enemy sprog[50]; //enemy type 2
 	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
 	int tileCount;
+
 	//objects for map creation
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
-	
 	SDL_Renderer *renderer;
+
+	//font generation - SDL_TTF required
+	TTF_Font *font;
+	SDL_Texture *label;
+	int labelW, labelH;
+
 }GameState;
 
 #endif /* STRUCTS_H_ */

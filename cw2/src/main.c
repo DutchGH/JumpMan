@@ -60,6 +60,11 @@ int main(int argc, char* argv[])
 	SDL_DestroyTexture(gameState.player.sheetTexture);
 	SDL_DestroyTexture(gameState.enemy);
 	SDL_DestroyTexture(gameState.brick);
+	if(gameState.label != NULL)
+	{
+		SDL_DestroyTexture(gameState.label);
+	}
+	TTF_CloseFont(gameState.font);
 
 
 
@@ -68,6 +73,7 @@ int main(int argc, char* argv[])
 	SDL_DestroyRenderer(renderer);
 
 	//clean up program
+	TTF_Quit();
 	SDL_Quit();
 	return(0);
 }
