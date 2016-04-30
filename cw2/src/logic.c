@@ -29,14 +29,25 @@ void updateLogic(GameState *game)
 	}
 
 	game->scrollX = -game->player.x+320;
+	//printf("SCROLLX VALUE = %g\n", game->scrollX);
+	printf("playerposition: %g\n", game->player.x);
 	if(game->scrollX > 0)
 	{
 		game->scrollX = 0;
+	}
+	else if(game->scrollX < 800-game->map.maxX)
+	{
+		game->scrollX = 800-game->map.maxX;
+	}
+	if (game->player.x > game->map.maxX-30)
+	{
+		game->player.x = game->map.maxX-30;
 	}
 	if(game->player.x < 0)
 	{
 		game->player.x = 0;
 	}
+
 }
 
 
