@@ -17,7 +17,7 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 		SDL_SetRenderDrawColor(renderer, 137,207,240,255);
 		//clear screen to grey
 		SDL_RenderClear(renderer);
-        SDL_Rect bgRect = {game->scrollX, -200, 1920, 1080};
+        SDL_Rect bgRect = {0, -200, 1920, 1080};
         SDL_RenderCopy(game->renderer, game->bg, NULL, &bgRect);
 
 		//render the tiles of the map
