@@ -55,6 +55,7 @@ typedef struct gameState
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
 	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
+	Ledge test[100];
 	int tileCount;
 
 	//objects for map creation

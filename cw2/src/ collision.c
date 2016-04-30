@@ -10,7 +10,7 @@ void collisionDetect(GameState *game)
 {
   float mw = 32, mh = 48;
   //Check for collision with any ledges (brick blocks)
-  for(int i = 0; i < 664; i++)
+  for(int i = 0; i < 2560; i++)
   {
 	float bx = game->ledge[i].bx;
 	//printf("ledge %d: %g\n", i, bx);

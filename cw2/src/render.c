@@ -28,7 +28,7 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 		SDL_Rect rect = { game->scrollX + game->player.x, game->player.y, 30, 50 };
 		SDL_RenderCopyEx(renderer, game->player.sheetTexture, &srcRect, &rect, 0, NULL, game->player.facingLeft);
 	
-	
+
 		//~ //create sprite for enemy
 		//~ SDL_Rect enemyRect = {50,50,106,120};
 		//~ SDL_RenderCopy(renderer, game->enemy, NULL, &enemyRect);

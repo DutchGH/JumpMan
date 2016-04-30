@@ -8,7 +8,7 @@
 #include "defs.h"
 
 //MAP HERE, 1 indicated a tile, 0 indicates a blank space. Can be adjusted
-int mapArray[30][40] = 
+int mapArray[30][40] =
 {
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
     {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
@@ -51,7 +51,7 @@ void loadMap(GameState *game)
 
 	for (y=0;y<30;y++)
 	{
-		for (x=0;x<40;x++)
+		for (x=0;x<80;x++)
 		{
             //printf("%d\n", mapArray[y][x]);
 			if (mapArray[y][x] > 0)
@@ -81,6 +81,7 @@ void loadMap(GameState *game)
 	//printf("%d %d\n", game->map.maxX, game->map.maxY);
 
 	// Set the start coordinates
+	printf("MAX X = %d MAX Y = %d\n", game->map.maxX, game->map.maxY);
 
 	game->map.startX = game->map.startY = 0;
 
@@ -105,11 +106,11 @@ void drawMap(GameState*game)
 
 	//Draw the map
 
-	for (y=y1;y<y2;y+=TILE_SIZE)
+	for (y=y1;y<game->map.maxY;y+=TILE_SIZE)
 	{
 		mapX = game->map.startX / TILE_SIZE;
 
-		for (x=x1;x<x2;x+=TILE_SIZE)
+		for (x=x1;x<game->map.maxX;x+=TILE_SIZE)
 		{
             //if the array shows a 1 on the map
 			if (mapArray[mapY][mapX] != 0)
@@ -117,15 +118,13 @@ void drawMap(GameState*game)
                 //printf("%d\n",mapArray[mapY][mapX]);
                 //set the coordinates for the tile
                 game->ledge[tileNumber].x = x;
+                //printf("x = %d\n", x);
                 game->ledge[tileNumber].y = y;
+                //printf("y = %d\n", y);
                 game->ledge[tileNumber].w = TILE_SIZE;
                 game->ledge[tileNumber].h = TILE_SIZE;
                 game->ledge[tileNumber].bx = x;
                 game->ledge[tileNumber].by = y;
-//                printf("x = %d, y = %d\n", x, y);
-                //printf("%d\n",tileNumber);
-                //printf("%d %d\n", x, y);
-                //create and place a tile
                 SDL_Rect ledgeRect = {game->scrollX + x, y, TILE_SIZE, TILE_SIZE};
                 SDL_RenderCopy(game->renderer, game->brick, NULL, &ledgeRect);
 			}
