@@ -9,28 +9,81 @@
 void updateLogic(GameState *game)
 {
 	game->globalTime++;
+	if(game->gameStatus == GAME_STATE_LIVES)
+	{
 	if(game->globalTime > 120)
-	{
-		game->gameStatus =GAME_STATE_GAME;
-
-	}
-	if(game->gameStatus == GAME_STATE_GAME)
-	{
-		//increase co-ordinates with directional velocity
-		game->player.x += game->player.dx;
-		game->player.y += game->player.dy;
-		//reset double jump counter once player lands
-		if(game->player.onLedge == 1)
 		{
-			game->player.jumpCount = 0;
+			shutDownStatusLives(game);
+			game->gameStatus =GAME_STATE_GAME;
 		}
-		//impose gravity upon the player
-		game->player.dy += GRAVITY;
+	}
+	else if (game->gameStatus == GAME_STATE_GAMEOVER)
+	{
+		if(game->globalTime>190)
+		{
+			SDL_Quit();
+			exit(0);
+		}
+	}
+	else if(game->gameStatus == GAME_STATE_GAME)
+	{
+		if(!game->player.isDead)
+		{
+			//increase co-ordinates with directional velocity
+			game->player.x += game->player.dx;
+			game->player.y += game->player.dy;
+			//reset double jump counter once player lands
+			if(game->player.onLedge == 1)
+			{
+				game->player.jumpCount = 0;
+			}
+
+			if(game->player.x > game->map.maxX - 80)
+			{
+				initVictory(game);
+				game->gameStatus = GAME_STATE_VICTORY;
+			}
+			//impose gravity upon the player
+			game->player.dy += GRAVITY;
+		}
+	    if(game->player.isDead && game->deathTime < 0)
+	    {
+	      game->deathTime = 120;
+	    }
+	    if(game->deathTime >= 0)
+	    {
+	      game->deathTime--;
+	      if(game->deathTime < 0)
+	      {
+	        game->player.lives--;
+
+	        if(game->player.lives >= 0)
+	        {
+	          initStatusLives(game);
+	          game->gameStatus = GAME_STATE_LIVES;
+	          game->globalTime = 0;
+
+	          //reset
+	          game->player.isDead = 0;
+	          game->player.x = 0;
+	          game->player.y = 378;
+	          game->player.dx = 0;
+	          game->player.dy = 0;
+	          game->player.onLedge = 0;
+	          //initStars(game);
+	        }
+	        else
+	        {
+	          initGameOver(game);
+	          game->gameStatus = GAME_STATE_GAMEOVER;
+	          game->globalTime = 0;
+	        }
+	      }
+	    }
 	}
 
 	game->scrollX = -game->player.x+320;
 	//printf("SCROLLX VALUE = %g\n", game->scrollX);
-	printf("player height: %g\n", game->player.y);
 	if(game->scrollX > 0)
 	{
 		game->scrollX = 0;

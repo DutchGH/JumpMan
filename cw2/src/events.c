@@ -36,7 +36,7 @@ int processEvents(SDL_Window *window, GameState *game)
 			    if((game->player.jumpCount < 2 || game->player.onLedge) && event.key.repeat == 0)
 				{
 			    //increase player's terminal velocity and declare hes not on a ledge
-				  game->player.dy = -8;
+				  game->player.dy = -6;
 				  game->player.onLedge = 0;
 				  game->player.jumpCount++;
 				}

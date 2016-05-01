@@ -13,6 +13,8 @@
 #define MAX_MAP_X 400
 #define MAX_MAP_Y 300
 #define TILE_SIZE 32
+#define MAX_TILES 3000
+#define MAX_ENEMY 50
 #define GRAVITY 0.5
 #define GAME_STATE_LIVES 0
 #define GAME_STATE_GAME 1

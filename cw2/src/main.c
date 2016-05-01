@@ -38,6 +38,7 @@ int main(int argc, char* argv[])
 
 	//make sure all elements are rendered in the same window
 	gameState.renderer = renderer;
+	SDL_RenderSetLogicalSize(renderer, SCREEN_WIDTH, SCREEN_HEIGHT);
 	loadGame(&gameState);
 
 	//flag for event loop for program

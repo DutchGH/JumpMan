@@ -7,7 +7,10 @@
 
 #ifndef GAMEOVER_H_
 #define GAMEOVER_H_
+void initGameOver(GameState *game);
 
+void drawGameOver(GameState *game);
+void shutDownGameOver(GameState *game);
 
 
 #endif /* GAMEOVER_H_ */

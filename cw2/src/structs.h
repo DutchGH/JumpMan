@@ -14,13 +14,14 @@ typedef struct player
 	float dx, dy; //movement velocities
 	int lives; //lives of player
 	char *name; //name of player
-	int onLedge;
+	int onLedge, isDead;
 
 	//used for motion
 	int currentSprite, walking, facingLeft, slowingDown;
 	int jumpCount;
 	//Texture for sprite animation
 	SDL_Texture *sheetTexture;
+	SDL_Texture *deathSheet;
 }Player;
 
 typedef struct enemy
@@ -45,18 +46,17 @@ typedef struct Ledge
 //gamestate struct - used to load all the sprites and textures.
 typedef struct gameState
 {
-	int globalTime;
-	int	gameStatus;
+	int globalTime, deathTime;
+	int	gameStatus; //used for determining screen to display
 	Map map; //used for map
-	float scrollX;
+	float scrollX; //used to scroll the map
 	Player player; //creates a player
 
 	
 	Enemy plog [50]; //enemy type 1
 	Enemy sprog[50]; //enemy type 2
-	Ledge ledge [3000]; //TODO: Make Dynamic for efficient memory use.
-	Ledge test[100];
-	int tileCount;
+	Ledge ledge [MAX_TILES]; //ledges
+	int tileCount; //used to count tiles for array
 
 	//objects for map creation
 	SDL_Texture *bg;

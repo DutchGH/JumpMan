@@ -12,6 +12,14 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 	{
 		drawStatusLives(game);
 	}
+	else if (game->gameStatus == GAME_STATE_GAMEOVER)
+	{
+		drawGameOver(game);
+	}
+	else if (game->gameStatus == GAME_STATE_VICTORY)
+	{
+		drawVictory(game);
+	}
 	else if (game->gameStatus == GAME_STATE_GAME)
 	{
 		SDL_SetRenderDrawColor(renderer, 137,207,240,255);
@@ -20,9 +28,15 @@ void doRender(SDL_Renderer *renderer, GameState *game)
         SDL_Rect bgRect = {0, -200, 1920, 1080};
         SDL_RenderCopy(game->renderer, game->bg, NULL, &bgRect);
 
+
 		//render the tiles of the map
 		drawMap(game);
 
+		for(int i = 0; i < MAX_ENEMY; i++)
+		{
+		  SDL_Rect starRect = { game->scrollX+game->plog[i].x, game->plog[i].y, 64, 64 };
+		  SDL_RenderCopy(renderer, game->enemy, NULL, &starRect);
+		}
 
 		SDL_Rect srcRect = { 60*game->player.currentSprite, 0, 60, 99 };
 		SDL_Rect rect = { game->scrollX + game->player.x, game->player.y, 30, 50 };

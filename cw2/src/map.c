@@ -89,7 +89,7 @@ void loadMap(GameState *game)
 
 void drawMap(GameState*game)
 {
-	int x, y, mapX, x1, x2, mapY, y1, y2;
+	int x, y, mapX, x1,mapY,y1;
     int tileNumber = 0;
     //calculate start and end points of the map
 	mapX = game->map.startX / TILE_SIZE;

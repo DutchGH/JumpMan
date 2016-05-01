@@ -8,6 +8,10 @@
 
 void collisionDetect(GameState *game)
 {
+	if(game->player.y > game->map.maxY)
+	{
+		game->player.isDead = 1;
+	}
   float mw = 25, mh = 48;
   //Check for collision with any ledges (brick blocks)
   for(int i = 0; i < game->map.maxX; i++)

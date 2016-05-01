@@ -9,6 +9,7 @@
 #define INIT_H_
 void initialiseSDL();
 void loadGame(GameState *game);
+void initPlogs(GameState *game);
 
 
 
