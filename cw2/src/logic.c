@@ -30,7 +30,7 @@ void updateLogic(GameState *game)
 
 	game->scrollX = -game->player.x+320;
 	//printf("SCROLLX VALUE = %g\n", game->scrollX);
-	printf("playerposition: %g\n", game->player.x);
+	printf("player height: %g\n", game->player.y);
 	if(game->scrollX > 0)
 	{
 		game->scrollX = 0;

@@ -94,12 +94,10 @@ void drawMap(GameState*game)
     //calculate start and end points of the map
 	mapX = game->map.startX / TILE_SIZE;
 	x1 = (game->map.startX % TILE_SIZE) * -1;
-	x2 = x1 + SCREEN_WIDTH + (x1 == 0 ? 0 : TILE_SIZE);
 
 	mapY = game->map.startY / TILE_SIZE;
 	y1 = (game->map.startY % TILE_SIZE) * -1;
 
-	y2 = y1 + SCREEN_HEIGHT + (y1 == 0 ? 0 : TILE_SIZE);
 
 
 

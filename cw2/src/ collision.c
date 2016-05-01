@@ -8,9 +8,9 @@
 
 void collisionDetect(GameState *game)
 {
-  float mw = 32, mh = 48;
+  float mw = 25, mh = 48;
   //Check for collision with any ledges (brick blocks)
-  for(int i = 0; i < 2560; i++)
+  for(int i = 0; i < game->map.maxX; i++)
   {
 	float bx = game->ledge[i].bx;
 	//printf("ledge %d: %g\n", i, bx);
@@ -30,7 +30,8 @@ void collisionDetect(GameState *game)
 
         //bumped our head, stop any jump velocity
         game->player.dy = 0;
-        game->player.onLedge = 1;
+        game->player.jumpCount = 2;
+        //game->player.onLedge = 1;
       }
     }
     if(mx+mw > bx && mx<bx+bw)
@@ -55,7 +56,6 @@ void collisionDetect(GameState *game)
       {
         //correct x
         game->player.x = bx+bw;
-        mx = bx+bw;
         //printf("Collided against left!\n");
         game->player.dx = 0;
 		game->player.walking = 0;
@@ -66,7 +66,6 @@ void collisionDetect(GameState *game)
       {
         //correct x
         game->player.x = bx-mw;
-        mx = bx-mw;
         //printf("Collided against left!\n");
         game->player.dx = 0;
 		game->player.walking = 0;

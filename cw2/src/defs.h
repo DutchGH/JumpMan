@@ -17,6 +17,7 @@
 #define GAME_STATE_LIVES 0
 #define GAME_STATE_GAME 1
 #define GAME_STATE_GAMEOVER 2
+#define GAME_STATE_VICTORY 3
 
 
 //LIBRARIES TO INCLUDE
@@ -32,6 +33,8 @@
 #include "init.h"
 #include "events.h"
 #include "lives.h"
+#include "gameOver.h"
+#include "gameWin.h"
 #include "logic.h"
 #include "render.h"
 #include "map.h"
