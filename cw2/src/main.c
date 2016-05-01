@@ -9,11 +9,8 @@
  */
 #include "defs.h"
 
-//TODO: Center entity on map for scrolling
 //TODO: Add enemy sprites - design new sprite
-//TODO: Implement SDL_TTF for life counter/menu screens.
 //TODO: Implement SDL_Sound for SFX/Music.
-//TODO: Add collision detection for out of bounds areas and enemies.
 
 int main(int argc, char* argv[])
 {

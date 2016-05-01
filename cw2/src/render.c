@@ -32,11 +32,11 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 		//render the tiles of the map
 		drawMap(game);
 
-		for(int i = 0; i < MAX_ENEMY; i++)
-		{
-		  SDL_Rect starRect = { game->scrollX+game->plog[i].x, game->plog[i].y, 64, 64 };
-		  SDL_RenderCopy(renderer, game->enemy, NULL, &starRect);
-		}
+//		for(int i = 0; i < MAX_ENEMY; i++)
+//		{
+//		  SDL_Rect starRect = { game->scrollX+game->plog[i].x, game->plog[i].y, 64, 64 };
+//		  SDL_RenderCopy(renderer, game->enemy, NULL, &starRect);
+//		}
 
 		SDL_Rect srcRect = { 60*game->player.currentSprite, 0, 60, 99 };
 		SDL_Rect rect = { game->scrollX + game->player.x, game->player.y, 30, 50 };

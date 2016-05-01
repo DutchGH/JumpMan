@@ -86,7 +86,7 @@ void loadGame(GameState *game)
 	game->player.isDead = 0;
 	game->gameStatus = GAME_STATE_LIVES;
 	game->deathTime = -1;
-	initPlogs(game);
+	//initPlogs(game);
 
 	initStatusLives(game);
 
