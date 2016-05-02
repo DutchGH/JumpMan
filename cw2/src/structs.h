@@ -26,7 +26,8 @@ typedef struct player
 
 typedef struct enemy
 {
-	int x,y; //co-ordinates of enemy
+	int x,y, baseX, baseY, mode; //co-ordinates of enemy
+	float phase;
 }Enemy;
 
 //parameters for map generation
@@ -68,6 +69,10 @@ typedef struct gameState
 	TTF_Font *font;
 	SDL_Texture *label;
 	int labelW, labelH;
+
+	//SFX
+	int musicChannel;
+	Mix_Chunk *bgMusic, *jumpSound, *dieSound, *victorySound;
 
 }GameState;
 

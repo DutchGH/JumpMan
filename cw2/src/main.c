@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
 		done = processEvents(window, &gameState);
 		updateLogic(&gameState);
 		collisionDetect(&gameState);
+		//enemyLogic(&gameState);
 
 		//render display
 		doRender(renderer, &gameState);
@@ -63,6 +64,10 @@ int main(int argc, char* argv[])
 		SDL_DestroyTexture(gameState.label);
 	}
 	TTF_CloseFont(gameState.font);
+	Mix_FreeChunk(gameState.bgMusic);
+	Mix_FreeChunk(gameState.dieSound);
+	Mix_FreeChunk(gameState.jumpSound);
+	Mix_FreeChunk(gameState.victorySound);
 
 
 

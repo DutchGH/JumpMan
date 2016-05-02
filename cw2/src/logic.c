@@ -38,6 +38,7 @@ void updateLogic(GameState *game)
 				game->player.jumpCount = 0;
 			}
 
+
 			if(game->player.x > game->map.maxX - 80)
 			{
 				initVictory(game);
@@ -45,6 +46,12 @@ void updateLogic(GameState *game)
 			}
 			//impose gravity upon the player
 			game->player.dy += GRAVITY;
+		  for(int i = 0; i < MAX_ENEMY; i++)
+		  {
+			game->plog[i].x = game->plog[i].baseX;
+			game->plog[i].y = game->plog[i].baseY;
+			game->plog[i].x = game->plog[i].baseX+sinf(game->globalTime*0.06f)*(32*2);
+		  }
 		}
 	    if(game->player.isDead && game->deathTime < 0)
 	    {
@@ -70,7 +77,6 @@ void updateLogic(GameState *game)
 	          game->player.dx = 0;
 	          game->player.dy = 0;
 	          game->player.onLedge = 0;
-	          //initStars(game);
 	        }
 	        else
 	        {

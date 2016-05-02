@@ -32,9 +32,9 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 		//render the tiles of the map
 		drawMap(game);
 
-		for(int i = 0; i < 8; i++)
+		for(int i = 0; i < MAX_ENEMY; i++)
 		{
-		  SDL_Rect plogRect = { game->scrollX+game->plog[i].x, game->plog[i].y, 32, 32 };
+		  SDL_Rect plogRect = {game-> scrollX + game->plog[i].x, game->plog[i].y, 32, 32 };
 		  SDL_RenderCopy(renderer, game->enemy, NULL, &plogRect);
 		}
 

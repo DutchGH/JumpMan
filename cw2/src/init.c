@@ -9,9 +9,9 @@
 void initialiseSDL()
 {
 	//initialise SDL
-	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO);
 	TTF_Init();
-
+	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096); //initialize sound
 	//error handling for launching SDL
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
@@ -23,20 +23,21 @@ void initPlogs(GameState *game)
 {
 	for(int i = 0; i<8; i++)
 	{
-		game->plog[i].x = (i+1) * 6;
-		game->plog[i].y = 384;
+		game->plog[i].baseX = (i+1) * 6;
+		game->plog[i].baseY = 384;
 	}
-	game->plog[0].x = (27*32);
-	game->plog[1].x = (35*32);
-	game->plog[2].x = (29*32);
-	game->plog[3].x = (47*32);
-	game->plog[4].x = (64*32);
-	game->plog[5].x = (63*32);
-	game->plog[6].x = (77*32);
-	game->plog[7].x = (84*32);
+	game->plog[0].baseX = (27*32);
+	game->plog[1].baseX = (35*32);
+	game->plog[2].baseX = (29*32);
+	game->plog[3].baseX = (47*32);
+	game->plog[4].baseX = (64*32);
+	game->plog[5].baseX = (63*32);
+	game->plog[6].baseX = (77*32);
+	game->plog[7].baseX = (84*32);
 
-	game->plog[2].y = (7*32);
-	game->plog[4].y = (17*32);
+	game->plog[2].baseY = (7*32);
+	game->plog[4].baseY = (17*32);
+
 
 
 }
@@ -103,6 +104,7 @@ void loadGame(GameState *game)
 	game->player.isDead = 0;
 	game->gameStatus = GAME_STATE_LIVES;
 	game->deathTime = -1;
+
 	//initPlogs(game);
 
 	initStatusLives(game);
