@@ -21,6 +21,23 @@ void initialiseSDL()
 
 void initPlogs(GameState *game)
 {
+	for(int i = 0; i<8; i++)
+	{
+		game->plog[i].x = (i+1) * 6;
+		game->plog[i].y = 384;
+	}
+	game->plog[0].x = (27*32);
+	game->plog[1].x = (35*32);
+	game->plog[2].x = (29*32);
+	game->plog[3].x = (47*32);
+	game->plog[4].x = (64*32);
+	game->plog[5].x = (63*32);
+	game->plog[6].x = (77*32);
+	game->plog[7].x = (84*32);
+
+	game->plog[2].y = (7*32);
+	game->plog[4].y = (17*32);
+
 
 }
 
@@ -37,7 +54,7 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
-	game->enemy = IMG_LoadTexture(game->renderer, "gfx/oct.png");
+	game->enemy = IMG_LoadTexture(game->renderer, "gfx/enemy.png");
 	if(!game->enemy)
 	{
 		printf("CANNOT FIND OCT.PNG!\n");
@@ -89,6 +106,7 @@ void loadGame(GameState *game)
 	//initPlogs(game);
 
 	initStatusLives(game);
+	initPlogs(game);
 
 	//load the map
 }
