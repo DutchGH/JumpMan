@@ -29,6 +29,7 @@ void updateLogic(GameState *game)
 	{
 		if(!game->player.isDead)
 		{
+			game->player.lifeState = game->player.sheetTexture;
 			//increase co-ordinates with directional velocity
 			game->player.x += game->player.dx;
 			game->player.y += game->player.dy;
@@ -55,6 +56,7 @@ void updateLogic(GameState *game)
 		}
 	    if(game->player.isDead && game->deathTime < 0)
 	    {
+	    	game->player.lifeState = game->player.deathSheet;
 	      game->deathTime = 120;
 	    }
 	    if(game->deathTime >= 0)

@@ -22,6 +22,7 @@ typedef struct player
 	//Texture for sprite animation
 	SDL_Texture *sheetTexture;
 	SDL_Texture *deathSheet;
+	SDL_Texture *lifeState;
 }Player;
 
 typedef struct enemy

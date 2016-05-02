@@ -63,8 +63,16 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
-	game->player.sheetTexture = IMG_LoadTexture(game->renderer, "spritesheetmod.png");
+	game->player.sheetTexture = IMG_LoadTexture(game->renderer, "gfx/spritesheetmod.png");
 	if(!game->player.sheetTexture)
+	{
+		printf("CANNOT FIND SPRITESHEETMOD.PNG!\n");
+		SDL_Quit();
+		exit(1);
+	}
+
+	game->player.deathSheet = IMG_LoadTexture(game->renderer, "gfx/spritesheetDead.png");
+	if(!game->player.deathSheet)
 	{
 		printf("CANNOT FIND SPRITESHEETMOD.PNG!\n");
 		SDL_Quit();
@@ -87,6 +95,15 @@ void loadGame(GameState *game)
 		SDL_Quit();
 		exit(1);
 	}
+
+	game->bgMusic = Mix_LoadWAV("audio/bgMusic.wav");
+	if(game->bgMusic != NULL)
+	{
+		Mix_VolumeChunk(game->bgMusic, 32);
+	}
+	game->dieSound = Mix_LoadWAV("death.wav");
+	game->jumpSound = Mix_LoadWAV("jump.wav");
+	game->victorySound = Mix_LoadWAV("victory.wav");
 
 	game->label = NULL;
 
