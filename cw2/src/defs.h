@@ -31,6 +31,7 @@
 #include "SDL2/SDL_mixer.h"
 #include "structs.h"
 #include "init.h"
+#include "quit.h"
 #include "events.h"
 #include "lives.h"
 #include "gameOver.h"

@@ -19,8 +19,7 @@ int processEvents(SDL_Window *window, GameState *game)
 		case SDL_WINDOWEVENT_CLOSE:
 			if(window)
 			{//if(window)
-				SDL_DestroyWindow(window);
-				window = NULL;
+				exitSDL(game, game->renderer, window);
 			}//if(window)
 			break;
 
@@ -28,7 +27,7 @@ int processEvents(SDL_Window *window, GameState *game)
 			switch(event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				SDL_Quit();
+				exitSDL(game, game->renderer, window);
 				break;
 			//check that the player isn't spamming the key, not jumping more than twice
 			//make sure that he's on a ledge before jumping

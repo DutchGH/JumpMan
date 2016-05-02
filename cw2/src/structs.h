@@ -10,61 +10,81 @@
 
 typedef struct player
 {
+	//position modifications
 	float x, y; //co-ordinates of player
 	float dx, dy; //movement velocities
+
+	//motion/sprite generation
+	int currentSprite, walking, facingLeft, slowingDown;
+
+	//situation bools
 	int lives; //lives of player
-	char *name; //name of player
+	int jumpCount;
 	int onLedge, isDead;
 
-	//used for motion
-	int currentSprite, walking, facingLeft, slowingDown;
-	int jumpCount;
-	//Texture for sprite animation
-	SDL_Texture *sheetTexture;
-	SDL_Texture *deathSheet;
-	SDL_Texture *lifeState;
+	//Textures
+	SDL_Texture *sheetTexture; //Alive Texture
+	SDL_Texture *deathSheet; //Death Texture
+	SDL_Texture *lifeState; //Texture to Load on situation
 }Player;
 
 typedef struct enemy
 {
-	int x,y, baseX, baseY, mode; //co-ordinates of enemy
+	//co-ordinates
+	int x,y, baseX, baseY, mode;
+
+	//TODO: Vary for sinF of each sprite
 	float phase;
 }Enemy;
 
 //parameters for map generation
 typedef struct Map
 {
-	int startX, startY; //starting coordinates
-	int maxX, maxY; //max coordinates 
+	//starting coordinates
+	int startX, startY;
+
+	//max coordinates
+	int maxX, maxY;
 } Map;
 
 //parameters for the ledge
 typedef struct Ledge
 {
-  int x, y, w, h;
-  float by, bx;
+	//position and measurements
+	int x, y, w, h;
+
+	//block positions for collision detection
+	float by, bx;
 } Ledge;
 
 //gamestate struct - used to load all the sprites and textures.
 typedef struct gameState
 {
-	int globalTime, deathTime;
-	int	gameStatus; //used for determining screen to display
-	Map map; //used for map
-	float scrollX; //used to scroll the map
-	Player player; //creates a player
+	//Renderer for gameState functions
+	SDL_Renderer *renderer;
+	SDL_Window *window;
 
-	
-	Enemy plog [50]; //enemy type 1
-	Enemy sprog[50]; //enemy type 2
+	//Sprites
+	Player player; //creates a player
+	Enemy plog[MAX_ENEMY]; //enemy type 1
+
+
+	//timings for game and death
+	int globalTime, deathTime;
+	//dictates what screen should be shown
+	int	gameStatus;
+
+	//Map contents
+	Map map; //used for map
 	Ledge ledge [MAX_TILES]; //ledges
 	int tileCount; //used to count tiles for array
+	float scrollX; //used to scroll the map
 
-	//objects for map creation
+
+	//Textures
 	SDL_Texture *bg;
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
-	SDL_Renderer *renderer;
 
 	//font generation - SDL_TTF required
 	TTF_Font *font;

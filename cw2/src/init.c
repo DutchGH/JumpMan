@@ -37,9 +37,6 @@ void initPlogs(GameState *game)
 
 	game->plog[2].baseY = (7*32);
 	game->plog[4].baseY = (17*32);
-
-
-
 }
 
 void loadGame(GameState *game)
@@ -109,8 +106,6 @@ void loadGame(GameState *game)
 
 
 	game->label = NULL;
-
-
 	game->player.x = 0;
 	game->player.y = 378;
     game->player.dx = 0;
