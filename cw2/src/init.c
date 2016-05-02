@@ -101,9 +101,12 @@ void loadGame(GameState *game)
 	{
 		Mix_VolumeChunk(game->bgMusic, 32);
 	}
-	game->dieSound = Mix_LoadWAV("death.wav");
-	game->jumpSound = Mix_LoadWAV("jump.wav");
-	game->victorySound = Mix_LoadWAV("victory.wav");
+	game->dieSound = Mix_LoadWAV("audio/death.wav");
+	game->jumpSound = Mix_LoadWAV("audio/jump.wav");
+	game->victorySound = Mix_LoadWAV("audio/victory.wav");
+	game->gameOver = Mix_LoadWAV("audio/gameOver.wav");
+
+
 
 	game->label = NULL;
 

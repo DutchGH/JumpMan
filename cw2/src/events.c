@@ -39,6 +39,7 @@ int processEvents(SDL_Window *window, GameState *game)
 				  game->player.dy = -6;
 				  game->player.onLedge = 0;
 				  game->player.jumpCount++;
+	              Mix_PlayChannel(-1, game->jumpSound, 0);
 				}
 				break;
 			}

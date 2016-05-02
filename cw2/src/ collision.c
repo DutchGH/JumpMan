@@ -18,12 +18,22 @@ void collisionDetect(GameState *game)
 	{
 		if(collide2d(game->player.x, game->player.y, game->plog[i].x, game->plog[i].y, 32, 32, 32, 32))
 		{
-			game->player.isDead = 1;
+			if(!game->player.isDead)
+			{
+				game->player.isDead = 1;
+				Mix_HaltChannel(game->musicChannel);
+				Mix_PlayChannel(-1, game->dieSound, 0);
+			}
 		}
 	}
 	if(game->player.y > game->map.maxY)
 	{
-		game->player.isDead = 1;
+	    if(!game->player.isDead)
+	    {
+	    	game->player.isDead = 1;
+	      Mix_HaltChannel(game->musicChannel);
+	      Mix_PlayChannel(-1, game->dieSound, 0);
+	    }
 	}
   float mw = 25, mh = 48;
   //Check for collision with any ledges (brick blocks)

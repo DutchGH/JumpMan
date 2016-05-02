@@ -73,7 +73,7 @@ typedef struct gameState
 
 	//SFX
 	int musicChannel;
-	Mix_Chunk *bgMusic, *jumpSound, *dieSound, *victorySound;
+	Mix_Chunk *bgMusic, *jumpSound, *dieSound, *victorySound,*gameOver;
 
 }GameState;
 

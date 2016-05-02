@@ -15,11 +15,12 @@ void updateLogic(GameState *game)
 		{
 			shutDownStatusLives(game);
 			game->gameStatus =GAME_STATE_GAME;
+		    game->musicChannel = Mix_PlayChannel(-1, game->bgMusic, -1);
 		}
 	}
 	else if (game->gameStatus == GAME_STATE_GAMEOVER)
 	{
-		if(game->globalTime>190)
+		if(game->globalTime>400)
 		{
 			SDL_Quit();
 			exit(0);
@@ -44,6 +45,9 @@ void updateLogic(GameState *game)
 			{
 				initVictory(game);
 				game->gameStatus = GAME_STATE_VICTORY;
+				Mix_HaltChannel(game->musicChannel);
+			    Mix_PlayChannel(-1, game->victorySound, 0);
+
 			}
 			//impose gravity upon the player
 			game->player.dy += GRAVITY;
@@ -84,6 +88,8 @@ void updateLogic(GameState *game)
 	        {
 	          initGameOver(game);
 	          game->gameStatus = GAME_STATE_GAMEOVER;
+	          Mix_HaltChannel(game->musicChannel);
+	          Mix_PlayChannel(-1, game->gameOver, 0);
 	          game->globalTime = 0;
 	        }
 	      }

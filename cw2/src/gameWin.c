@@ -24,7 +24,6 @@ void drawVictory(GameState *game)
 	SDL_SetRenderDrawColor(game->renderer, 255,0,0,255);
 	SDL_Rect textRect = {400-game->labelW/2, 300-game->labelH/2, game->labelW, game->labelH};
 	SDL_RenderCopy(game->renderer, game->label, NULL, &textRect);
-
 }
 
 void shutDownVictory(GameState *game)
