@@ -2,14 +2,14 @@
 # code details
 
 EXE_DIR = .
-EXE = $(EXE_DIR)/rendering
+EXE = $(EXE_DIR)/jumpMan
 
 SRC= main.c init.c map.c quit.c lives.c logic.c events.c render.c gameWin.c gameOver.c collision.c
 
 # generic build details
 
 CC =     gcc
-CFLAGS = -Wall -O
+CFLAGS = -Wall -O -std=c11
 LIBS =   -lm -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 
 # compile to  object code

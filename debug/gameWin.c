@@ -18,7 +18,7 @@ void initVictory(GameState *game)
 
 void drawVictory(GameState *game)
 {
-	SDL_SetRenderDrawColor(game->renderer, 255, 0, 0 ,255);
+	SDL_SetRenderDrawColor(game->renderer, 0, 153, 0 ,255);
 	SDL_RenderClear(game->renderer);
 
 	SDL_SetRenderDrawColor(game->renderer, 255,0,0,255);
