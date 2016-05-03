@@ -4,13 +4,7 @@
  *  Created on: 20 Apr 2016
  *      Author: jake
  */
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include "SDL2/SDL.h"
-#include "SDL2/SDL_image.h"
-#include "structs.h"
+#include "defs.h"
 
 
 int processEvents(SDL_Window *window, GameState *game)
@@ -25,8 +19,7 @@ int processEvents(SDL_Window *window, GameState *game)
 		case SDL_WINDOWEVENT_CLOSE:
 			if(window)
 			{//if(window)
-				SDL_DestroyWindow(window);
-				window = NULL;
+				exitSDL(game, game->renderer, window);
 			}//if(window)
 			break;
 
@@ -34,42 +27,19 @@ int processEvents(SDL_Window *window, GameState *game)
 			switch(event.key.keysym.sym)
 			{
 			case SDLK_ESCAPE:
-				SDL_Quit();
+				exitSDL(game, game->renderer, window);
 				break;
+			//check that the player isn't spamming the key, not jumping more than twice
+			//make sure that he's on a ledge before jumping
 			case SDLK_UP:
-				//if player is not yet already double-jumping:
-//				if(game->player.jumpCount < 2 && event.key.repeat == 0)
-//				{
-//					//
-//					//printf("Jumping\n");
-//					game->player.dy = -10;
-//					game->player.playerMovement.jump = true;
-//					game->player.jumpCount++;
-//				}
-			    if(game->player.jumpCount < 2 || game->player.onLedge && event.key.repeat == 0)
-			            {
-			              game->player.dy = -8;
-			              game->player.onLedge = 0;
-			              game->player.jumpCount++;
-			            }
-		
-				break;
-			case SDLK_LEFT:
-				game->player.playerMovement.left = true;
-				break;
-			case SDLK_RIGHT:
-				game->player.playerMovement.right = true;
-				break;
-			}
-			break;
-		case SDL_KEYUP:
-			switch(event.key.keysym.sym)
-			{
-			case SDLK_LEFT:
-				game->player.playerMovement.left = false;
-				break;
-			case SDLK_RIGHT:
-				game->player.playerMovement.right = false;
+			    if((game->player.jumpCount < 2 || game->player.onLedge) && event.key.repeat == 0)
+				{
+			    //increase player's terminal velocity and declare hes not on a ledge
+				  game->player.dy = -6;
+				  game->player.onLedge = 0;
+				  game->player.jumpCount++;
+	              Mix_PlayChannel(-1, game->jumpSound, 0);
+				}
 				break;
 			}
 			break;
@@ -79,66 +49,62 @@ int processEvents(SDL_Window *window, GameState *game)
 		}//event type switch
 	}//Wait for event...
 
+	  const Uint8 *state = SDL_GetKeyboardState(NULL);
+	  //give the player a little extra height when holding the up key
+	  if(state[SDL_SCANCODE_UP])
+	  {
+	    game->player.dy -= 0.2f;
+	  }
 
-	// MOVEMENT CONTROLS
-	if(game->player.playerMovement.left) //if player is holding left
-	{
-		//move him left and flip the sprite
-		game->player.x -= 5; //move player left
-		if(game->player.dx == 6)
-		{
-			game->player.dx = 6;
-		}
-
-		game->player.walking = 1;
-		game->player.facingLeft = 1;
-		game->player.slowingDown = 0;
-
-
-		if (game->globalTime%10 == 0)
-		{
-			//increment the sprite sheet 
-			game->player.currentSprite++;
-			game->player.currentSprite %=8;
-		}
-	}
-	else if(game->player.playerMovement.right)
-	{
-		//move player right
-		game->player.x += 5;
-		if(game->player.dx > 6)
-		{
-			game->player.dx = 6;
-		}
-		game->player.walking = 1;
-		game->player.facingLeft = 0;
+	  //Walking
+	  if(state[SDL_SCANCODE_LEFT])
+	  {
+		//accelerate in the left direction until max. velocity
+	    game->player.dx -= 0.5;
+	    if(game->player.dx < -6)
+	    {
+	      game->player.dx = -6;
+	    }
+	    game->player.facingLeft = 1;
 	    game->player.slowingDown = 0;
-
 		if (game->globalTime%10 == 0)
-		{
-			//shift sprite with gametime
-			game->player.currentSprite++;
-			game->player.currentSprite %=8;
-		}
-	}
+			{
+				//shift sprite with gametime
+				game->player.currentSprite++;
+				game->player.currentSprite %=8;
+			}
+	  }
+	  else if(state[SDL_SCANCODE_RIGHT])
+	  {
+		//accelerate in the right direction until max. velocity
+	    game->player.dx += 0.5;
+	    if(game->player.dx > 6)
+	    {
+	      game->player.dx = 6;
+	    }
+	    game->player.facingLeft = 0;
+	    game->player.slowingDown = 0;
+		if (game->globalTime%10 == 0)
+			{
+				//shift sprite with gametime
+				game->player.currentSprite++;
+				game->player.currentSprite %=8;
+			}
+	  }
+
 	//if player is stationary
 	else
 	{
 		//set defult sprite and stop his movement 
 		game->player.walking = 0;
+		game->player.dx *= 0.8f;
 		game->player.currentSprite = 9;
 		game->player.slowingDown = 1;
-		    if(fabsf(game->player.dx) < 0.1f)
-		    {
-		      game->player.dx = 0;
-		    }
+		if(fabsf(game->player.dx) < 0.1f)
+		{
+		  game->player.dx = 0;
+		}
 	}
-
-
-
-
-
-
 
 	return done;
 }
