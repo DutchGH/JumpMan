@@ -84,6 +84,14 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
+	game->teleporter = IMG_LoadTexture(game->renderer, "gfx/teleportSheet.png");
+	if(!game->teleporter)
+	{
+		printf("CANNOT FIND TELEPORTSHEET.PNG");
+		SDL_Quit();
+		exit(1);
+	}
+
 	//LOAD FONT
 	game->font = TTF_OpenFont("fonts/VCR.ttf",48);
 	if(!game->font)
