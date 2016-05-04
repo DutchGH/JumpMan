@@ -8,6 +8,7 @@
 void updateLogic(GameState *game)
 {
 	game->globalTime++;
+
 	if(game->gameStatus == GAME_STATE_LIVES)
 	{
 		if(game->globalTime > 120)
@@ -27,6 +28,15 @@ void updateLogic(GameState *game)
 		}
 	}
 
+	else if (game->gameStatus == GAME_STATE_VICTORY)
+	{
+		if(game->globalTime>400)
+		{
+		exitSDL(game, game->renderer, game->window);
+		exit(0);
+		}
+	}
+
 	else if(game->gameStatus == GAME_STATE_GAME)
 	{
 		if(!game->player.isDead)
@@ -35,11 +45,16 @@ void updateLogic(GameState *game)
 			//increase co-ordinates with directional velocity
 			game->player.x += game->player.dx;
 			game->player.y += game->player.dy;
-
 			//reset double jump counter once player lands
 			if(game->player.onLedge == 1)
 			{
 				game->player.jumpCount = 0;
+			}
+
+			if (game->globalTime%4 == 0)
+			{
+				game->currentTeleColor++;
+				game->currentTeleColor %=3;
 			}
 
 
@@ -49,6 +64,7 @@ void updateLogic(GameState *game)
 				game->gameStatus = GAME_STATE_VICTORY;
 				Mix_HaltChannel(game->musicChannel);
 				Mix_PlayChannel(-1, game->victorySound, 0);
+				game->globalTime = 0;
 			}
 
 			//impose gravity upon the player
@@ -67,7 +83,7 @@ void updateLogic(GameState *game)
 		if(game->player.isDead && game->deathTime < 0)
 		{
 			game->player.lifeState = game->player.deathSheet;
-			game->deathTime = 120;
+			game->deathTime = 60;
 		}
 
 		if(game->deathTime >= 0)

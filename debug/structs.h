@@ -85,6 +85,8 @@ typedef struct gameState
 	SDL_Texture *bg;
 	SDL_Texture *brick;
 	SDL_Texture *enemy; //texture for enemy
+	SDL_Texture *teleporter;
+	int currentTeleColor;
 
 	//font generation - SDL_TTF required
 	TTF_Font *font;

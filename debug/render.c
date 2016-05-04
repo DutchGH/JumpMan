@@ -42,10 +42,10 @@ void doRender(SDL_Renderer *renderer, GameState *game)
 		SDL_Rect rect = { game->scrollX + game->player.x, game->player.y, 30, 50 };
 		SDL_RenderCopyEx(renderer, game->player.lifeState, &srcRect, &rect, 0, NULL, game->player.facingLeft);
 	
+		SDL_Rect teleRect = { 64*game->currentTeleColor, 0, 64, 64 };
+		SDL_Rect teleRectGame = { game->scrollX + (game->map.maxX - 100), 288, 64, 64 };
+		SDL_RenderCopyEx(renderer, game->teleporter, &teleRect, &teleRectGame, 0, NULL, 0);
 
-		//~ //create sprite for enemy
-		//~ SDL_Rect enemyRect = {50,50,106,120};
-		//~ SDL_RenderCopy(renderer, game->enemy, NULL, &enemyRect);
 	}
 	//render everything on the screen
 	SDL_RenderPresent(renderer);
