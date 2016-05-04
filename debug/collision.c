@@ -8,6 +8,7 @@
 
 int collide2d(float x1, float y1, float x2, float y2, float wt1, float ht1, float wt2, float ht2)
 {
+	//if any two blocks collide, return 1
 	return (!((x1 > (x2+wt2)) || (x2 > (x1+wt1)) || (y1 > (y2+ht2)) || (y2 > (y1+ht1))));
 }
 
@@ -16,10 +17,13 @@ void collisionDetect(GameState *game)
 
 	for(int i = 0; i < 8; i++)
 	{
+		//if the player collides with any of the sprites
 		if(collide2d(game->player.x, game->player.y, game->plog[i].x, game->plog[i].y, 32, 32, 32, 32))
 		{
+			 //if the player isn't dead
 			if(!game->player.isDead)
 			{
+				//make him dead and play the death music
 				game->player.isDead = 1;
 				Mix_HaltChannel(game->musicChannel);
 				Mix_PlayChannel(-1, game->dieSound, 0);
@@ -27,10 +31,12 @@ void collisionDetect(GameState *game)
 		}
 	}
 
+	//if the player falls out of bounds of the map
 	if(game->player.y > game->map.maxY)
 	{
 		if(!game->player.isDead)
 		{
+			//make him dead and play the death musi
 			game->player.isDead = 1;
 			Mix_HaltChannel(game->musicChannel);
 			Mix_PlayChannel(-1, game->dieSound, 0);
@@ -66,7 +72,7 @@ void collisionDetect(GameState *game)
 
 		if(mx+mw > bx && mx<bx+bw)
 		{
-			//are we landing on the ledge
+			//are we landing on the ledge?
 			if(my+mh > by && my < by && game->player.dy > 0)
 			{
 				//correct y

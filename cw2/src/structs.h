@@ -19,8 +19,8 @@ typedef struct player
 
 	//situation bools
 	int lives; //lives of player
-	int jumpCount;
-	int onLedge, isDead;
+	int jumpCount; //how many times has the player jumped?
+	int onLedge, isDead; //bool flags for events
 
 	//Textures
 	SDL_Texture *sheetTexture; //Alive Texture
@@ -28,6 +28,8 @@ typedef struct player
 	SDL_Texture *lifeState; //Texture to Load on situation
 }Player;
 
+
+//enemy paramerters
 typedef struct enemy
 {
 	//co-ordinates
@@ -36,6 +38,8 @@ typedef struct enemy
 	//TODO: Vary for sinF of each sprite
 	float phase;
 }Enemy;
+
+
 
 //parameters for map generation
 typedef struct Map
@@ -47,6 +51,8 @@ typedef struct Map
 	int maxX, maxY;
 } Map;
 
+
+
 //parameters for the ledge
 typedef struct Ledge
 {
@@ -56,6 +62,8 @@ typedef struct Ledge
 	//block positions for collision detection
 	float by, bx;
 } Ledge;
+
+
 
 //gamestate struct - used to load all the sprites and textures.
 typedef struct gameState

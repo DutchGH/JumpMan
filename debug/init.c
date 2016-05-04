@@ -13,6 +13,7 @@ void initialiseSDL()
 	TTF_Init();
 	Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, MIX_DEFAULT_CHANNELS, 4096); //initialize sound
 	//error handling for launching SDL
+
 	if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		fprintf(stderr,"SDL_Init failed %s", SDL_GetError());
@@ -41,9 +42,10 @@ void initPlogs(GameState *game)
 
 void loadGame(GameState *game)
 {
-    loadMap(game);
+	//initialise global time for logic
     game->globalTime = 0;
 
+    //LOAD ALL THE IMAGES
     game->bg = IMG_LoadTexture(game->renderer, "gfx/bg3.png");
 	if(!game->bg)
 	{
@@ -92,6 +94,9 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
+	//load the map
+    loadMap(game);
+
 	//LOAD FONT
 	game->font = TTF_OpenFont("fonts/VCR.ttf",48);
 	if(!game->font)
@@ -101,6 +106,7 @@ void loadGame(GameState *game)
 		exit(1);
 	}
 
+	//LOAD SOUNDS
 	game->bgMusic = Mix_LoadWAV("audio/bgMusic.wav");
 	if(game->bgMusic != NULL)
 	{
@@ -112,7 +118,7 @@ void loadGame(GameState *game)
 	game->gameOver = Mix_LoadWAV("audio/gameOver.wav");
 
 
-
+	//INITIAL GAME PARAMETERS
 	game->label = NULL;
 	game->player.x = 0;
 	game->player.y = 378;
@@ -128,11 +134,9 @@ void loadGame(GameState *game)
 	game->gameStatus = GAME_STATE_LIVES;
 	game->deathTime = -1;
 
-	//initPlogs(game);
-
+	//init lives and enemies
 	initStatusLives(game);
 	initPlogs(game);
 
-	//load the map
 }
 

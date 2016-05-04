@@ -24,6 +24,7 @@ void initStatusLives(GameState *game)
 
 void drawStatusLives(GameState *game)
 {
+	//draw text on a black background
 	SDL_SetRenderDrawColor(game->renderer, 0,0,0,255);
 	SDL_RenderClear(game->renderer);
 	SDL_SetRenderDrawColor(game->renderer, 255,255,255,255);
@@ -34,6 +35,7 @@ void drawStatusLives(GameState *game)
 
 void shutDownStatusLives(GameState *game)
 {
+	//free texture
 	SDL_DestroyTexture(game->label);
 	game->label = NULL;
 }

@@ -8,15 +8,21 @@
 //clean up textures
 void exitSDL (GameState *game, SDL_Renderer *renderer, SDL_Window *window)
 {
+	//DESTROY ANY TEXTURE AND FREE ALL ENTITES
 	SDL_DestroyTexture(game->player.sheetTexture);
 	SDL_DestroyTexture(game->player.deathSheet);
 	SDL_DestroyTexture(game->enemy);
 	SDL_DestroyTexture(game->brick);
+	SDL_DestroyTexture(game->teleporter);
+
+	//FREE FONTS
 	if(game->label != NULL)
 	{
 		SDL_DestroyTexture(game->label);
 	}
 	TTF_CloseFont(game->font);
+
+	//FREE SOUNDS
 	Mix_FreeChunk(game->bgMusic);
 	Mix_FreeChunk(game->dieSound);
 	Mix_FreeChunk(game->jumpSound);

@@ -9,31 +9,38 @@ void updateLogic(GameState *game)
 {
 	game->globalTime++;
 
+	/*Choose which screen to display with its corresponding gameState
+	and What actions to take*/
+
+
 	if(game->gameStatus == GAME_STATE_LIVES)
 	{
+		//wait 2 seconds before displaying the game again
 		if(game->globalTime > 120)
 		{
-		shutDownStatusLives(game);
-		game->gameStatus =GAME_STATE_GAME;
-		game->musicChannel = Mix_PlayChannel(-1, game->bgMusic, -1);
+			shutDownStatusLives(game);
+			game->gameStatus =GAME_STATE_GAME;
+			game->musicChannel = Mix_PlayChannel(-1, game->bgMusic, -1);
 		}
 	}
 
+	//if gameover is displayed, exit the game
 	else if (game->gameStatus == GAME_STATE_GAMEOVER)
 	{
 		if(game->globalTime>400)
 		{
-		exitSDL(game, game->renderer, game->window);
-		exit(0);
+			exitSDL(game, game->renderer, game->window);
+			exit(0);
 		}
 	}
 
+	//if the victory screen is displayed, exit the screen
 	else if (game->gameStatus == GAME_STATE_VICTORY)
 	{
 		if(game->globalTime>400)
 		{
-		exitSDL(game, game->renderer, game->window);
-		exit(0);
+			exitSDL(game, game->renderer, game->window);
+			exit(0);
 		}
 	}
 
@@ -123,6 +130,7 @@ void updateLogic(GameState *game)
 		}
 	}
 
+	//set the scrollX values to be slightly behind the player for easier viewing
 	game->scrollX = -game->player.x+320;
 
 	//stop player going out of bounds/camera scrolling too far
